@@ -226,12 +226,12 @@ export default function Dashboard() {
           </Carousel>
         </div>
 
-        {/* Desktop Grid (>= 1024px) - 4 cards per row, no carousel */}
-        <div className="hidden lg:grid lg:grid-cols-4 gap-6">
-          {statCards.map((card, index) => (
+        {/* Desktop Grid (>= 1024px) - 4 cards per row, no carousel, fixed width */}
+        <div className="hidden lg:grid lg:grid-cols-4 gap-4 max-w-full overflow-hidden">
+          {statCards.slice(0, 4).map((card, index) => (
             <div 
               key={index}
-              className="transform transition-all duration-500 hover:scale-105"
+              className="transform transition-all duration-500 hover:scale-105 w-full"
               style={{
                 animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
               }}

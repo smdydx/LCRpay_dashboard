@@ -107,17 +107,17 @@ export function StatCard({ title, value, icon: Icon, trend, className, gradient 
         <div className="absolute bottom-0 right-0 w-32 h-32 bg-white rounded-full blur-3xl" />
       </div>
 
-      <CardContent className="p-7 relative z-10">
-        <div className="flex items-start justify-between gap-4">
-          <div className="space-y-4 flex-1">
+      <CardContent className="p-4 relative z-10">
+        <div className="flex items-start justify-between gap-3">
+          <div className="space-y-3 flex-1">
             {/* Title */}
-            <p className="text-sm font-bold text-white/90 uppercase tracking-widest drop-shadow-lg">
+            <p className="text-xs font-bold text-white/90 uppercase tracking-wider drop-shadow-lg">
               {title}
             </p>
 
             {/* Value with enhanced styling */}
             <div className={cn(
-              "text-5xl font-black tracking-tight transition-all duration-500",
+              "text-3xl font-black tracking-tight transition-all duration-500",
               "text-white drop-shadow-2xl",
               isAnimating && "animate-pulse",
               isHovered && "scale-110"
@@ -128,7 +128,7 @@ export function StatCard({ title, value, icon: Icon, trend, className, gradient 
             {/* Trend indicator */}
             {trend && (
               <div className={cn(
-                "inline-flex items-center gap-2 px-3 py-1.5 rounded-full",
+                "inline-flex items-center gap-1.5 px-2 py-1 rounded-full",
                 "backdrop-blur-sm transition-all duration-500",
                 trend.isPositive 
                   ? "bg-green-500/30 text-green-100" 
@@ -136,12 +136,11 @@ export function StatCard({ title, value, icon: Icon, trend, className, gradient 
                 isHovered && "scale-110 shadow-lg"
               )}>
                 {trend.isPositive ? (
-                  <TrendingUp className="h-4 w-4 animate-bounce" />
+                  <TrendingUp className="h-3 w-3 animate-bounce" />
                 ) : (
-                  <TrendingDown className="h-4 w-4 animate-bounce" />
+                  <TrendingDown className="h-3 w-3 animate-bounce" />
                 )}
-                <span className="font-bold text-sm">{Math.abs(trend.value)}%</span>
-                <span className="text-xs opacity-80">vs last month</span>
+                <span className="font-bold text-xs">{Math.abs(trend.value)}%</span>
               </div>
             )}
           </div>
@@ -150,19 +149,19 @@ export function StatCard({ title, value, icon: Icon, trend, className, gradient 
           <div className="relative">
             {/* Outer glow ring */}
             <div className={cn(
-              "absolute -inset-4 rounded-3xl blur-2xl opacity-0 transition-all duration-700",
+              "absolute -inset-3 rounded-2xl blur-xl opacity-0 transition-all duration-700",
               "group-hover:opacity-60 bg-white/30"
             )} />
 
             {/* Pulsing ring */}
             <div className={cn(
-              "absolute -inset-2 rounded-2xl border-2 border-white/40",
+              "absolute -inset-1 rounded-xl border-2 border-white/40",
               "opacity-0 group-hover:opacity-100 animate-ping"
             )} />
 
             {/* Icon background */}
             <div className={cn(
-              "relative h-24 w-24 rounded-3xl flex items-center justify-center",
+              "relative h-16 w-16 rounded-2xl flex items-center justify-center",
               "bg-white/20 backdrop-blur-xl shadow-2xl",
               "border border-white/30",
               "transform transition-all duration-700",
@@ -170,7 +169,7 @@ export function StatCard({ title, value, icon: Icon, trend, className, gradient 
               "group-hover:bg-white/30"
             )}>
               <Icon className={cn(
-                "h-12 w-12 text-white drop-shadow-2xl",
+                "h-8 w-8 text-white drop-shadow-2xl",
                 "transition-all duration-700",
                 isHovered && "scale-125 rotate-12"
               )} />
