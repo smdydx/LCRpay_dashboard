@@ -3,13 +3,6 @@ import { StatCard } from "@/components/StatCard";
 import { UserTable } from "@/components/UserTable";
 import { BBPSTable } from "@/components/BBPSTable";
 import { Users, Zap, DollarSign, TrendingUp, Crown, Smartphone, Receipt, CheckCircle, Clock } from "lucide-react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 
 const sampleUsers = [
   {
@@ -180,43 +173,47 @@ const statCards = [
 
 export default function Dashboard() {
   return (
-    <div className="p-4 md:p-6 space-y-4 md:space-y-6 animate-fade-in">
-      <div className="mb-4 md:mb-8">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent animate-slide-in-up">Dashboard</h2>
+    <div className="p-4 sm:p-5 md:p-6 lg:p-8 space-y-6 md:space-y-8 animate-fade-in">
+      {/* Header Section */}
+      <div className="mb-4 md:mb-6">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent animate-slide-in-up">
+          Dashboard
+        </h2>
         <p className="text-sm md:text-base text-muted-foreground mt-2 animate-slide-in-up" style={{ animationDelay: "0.1s" }}>
           Welcome back! Here's what's happening today.
         </p>
       </div>
 
-      {/* All Cards - Horizontal Scroll */}
-      <div className="relative -mx-4 px-4 md:mx-0 md:px-0">
-        <div className="overflow-x-auto scrollbar-hide pb-2">
-          <div className="flex gap-4 md:gap-5 lg:gap-6" style={{ minWidth: 'min-content' }}>
-            {statCards.map((card, index) => (
-              <div 
-                key={index}
-                className="flex-shrink-0 w-[280px] sm:w-[300px] md:w-[320px] lg:w-[calc((100%-4.5rem)/4)]"
-                style={{
-                  animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
-                }}
-              >
-                <StatCard
-                  title={card.title}
-                  value={card.value}
-                  icon={card.icon}
-                  trend={card.trend}
-                  gradient={card.gradient}
-                />
-              </div>
-            ))}
+      {/* Stats Grid - Fully Responsive with proper breakpoints */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
+        {statCards.map((card, index) => (
+          <div
+            key={index}
+            className="w-full"
+            style={{
+              animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
+            }}
+            data-testid={`card-${card.title.toLowerCase().replace(/\s+/g, '-')}`}
+          >
+            <StatCard
+              title={card.title}
+              value={card.value}
+              icon={card.icon}
+              trend={card.trend}
+              gradient={card.gradient}
+            />
           </div>
-        </div>
+        ))}
       </div>
 
-      {/* Recent Activity Section */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 md:gap-6 mt-6 md:mt-8">
-        <UserTable users={sampleUsers} />
-        <BBPSTable services={sampleServices} />
+      {/* Details Section - User Table and BBPS Table */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 md:gap-5 lg:gap-6">
+        <div className="w-full">
+          <UserTable users={sampleUsers} />
+        </div>
+        <div className="w-full">
+          <BBPSTable services={sampleServices} />
+        </div>
       </div>
     </div>
   );
