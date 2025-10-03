@@ -352,7 +352,7 @@
   body {
     @apply font-sans antialiased bg-background text-foreground overflow-x-hidden;
   }
-  
+
   html {
     @apply overflow-x-hidden;
   }
@@ -463,5 +463,14 @@
   .border.active-elevate-2:not(.no-active-interaction-elevate)::after,
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after {
     inset: -1px;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
