@@ -1,7 +1,5 @@
-
 import { Card, CardContent } from "@/components/ui/card";
-import { LucideIcon, TrendingDown, TrendingUp } from "lucide-react";
-import { useEffect, useState } from "react";
+import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface StatCardProps {
@@ -12,80 +10,24 @@ interface StatCardProps {
     value: number;
     isPositive: boolean;
   };
-  className?: string;
+  prefix?: string;
   gradient?: string;
 }
 
-export function StatCard({ title, value, icon: Icon, trend, className, gradient }: StatCardProps) {
-  const [displayValue, setDisplayValue] = useState<string>("");
-  const [isAnimating, setIsAnimating] = useState(true);
-  const [isHovered, setIsHovered] = useState(false);
-
-  useEffect(() => {
-    const valueStr = String(value);
-    const numericValue = parseFloat(valueStr.replace(/[^0-9.]/g, ""));
-    const prefix = valueStr.match(/[^0-9.,]+/)?.[0] || "";
-    const suffix = valueStr.match(/[^0-9.,]+$/)?.[0] || "";
-
-    if (isNaN(numericValue)) {
-      setDisplayValue(valueStr);
-      setIsAnimating(false);
-      return;
-    }
-
-    let currentValue = 0;
-    const duration = 1500;
-    const steps = 60;
-    const increment = numericValue / steps;
-    const stepDuration = duration / steps;
-
-    const timer = setInterval(() => {
-      currentValue += increment;
-      if (currentValue >= numericValue) {
-        currentValue = numericValue;
-        clearInterval(timer);
-        setIsAnimating(false);
-      }
-      const formattedValue = currentValue.toLocaleString("en-IN", {
-        maximumFractionDigits: 1,
-      });
-      setDisplayValue(`${prefix}${formattedValue}${suffix}`);
-    }, stepDuration);
-
-    return () => clearInterval(timer);
-  }, [value]);
-
-  const selectedGradient = gradient || "from-violet-600 via-purple-600 to-fuchsia-600";
-
+export function StatCard({
+  title,
+  value,
+  icon: Icon,
+  trend,
+  prefix = "",
+  gradient = "from-blue-500 to-purple-500"
+}: StatCardProps) {
   return (
-    <Card
-      className={cn(
-        "relative overflow-hidden group cursor-pointer border-0 h-full",
-        "transition-all duration-500 ease-out",
-        "hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)]",
-        "transform hover:-translate-y-2 hover:scale-105",
-        className
-      )}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Main gradient background */}
-      <div className={cn(
-        "absolute inset-0 bg-gradient-to-br opacity-90 transition-opacity duration-700",
-        selectedGradient,
-        "group-hover:opacity-100"
-      )} />
-
-      {/* Animated mesh gradient overlay */}
-      <div className={cn(
-        "absolute inset-0 bg-gradient-to-tr opacity-0 transition-all duration-700",
-        "group-hover:opacity-30",
-        gradient === "from-blue-500 to-cyan-500" ? "from-cyan-400 to-blue-600" :
-        gradient === "from-green-500 to-emerald-500" ? "from-emerald-400 to-green-600" :
-        gradient === "from-orange-500 to-red-500" ? "from-red-400 to-orange-600" :
-        "from-fuchsia-400 to-violet-600"
-      )} />
-
+    <Card className={cn(
+      "relative overflow-hidden border-0 group transition-all duration-500 hover:scale-105 hover:shadow-2xl h-full",
+      "bg-gradient-to-br",
+      gradient
+    )}>
       {/* Shimmer animation */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
         <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1500 ease-out">
@@ -103,83 +45,53 @@ export function StatCard({ title, value, icon: Icon, trend, className, gradient 
 
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-0 w-40 h-40 bg-white rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-32 h-32 bg-white rounded-full blur-3xl" />
+        <div className="absolute top-0 left-0 w-32 h-32 md:w-40 md:h-40 bg-white rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-white rounded-full blur-3xl" />
       </div>
 
-      <CardContent className="p-4 sm:p-5 relative z-10">
-        <div className="flex items-start justify-between gap-2">
-          <div className="space-y-2 flex-1 min-w-0">
+      <CardContent className="p-3 sm:p-4 md:p-5 lg:p-6 relative z-10">
+        <div className="flex items-start justify-between gap-2 md:gap-3">
+          <div className="space-y-1 sm:space-y-2 flex-1 min-w-0">
             {/* Title */}
-            <p className="text-xs font-bold text-white/90 uppercase tracking-wider drop-shadow-lg truncate">
+            <p className="text-[10px] sm:text-xs font-bold text-white/90 uppercase tracking-wider drop-shadow-lg truncate">
               {title}
             </p>
 
-            {/* Value with enhanced styling */}
-            <div className={cn(
-              "text-2xl sm:text-3xl font-black tracking-tight transition-all duration-500",
-              "text-white drop-shadow-2xl truncate",
-              isAnimating && "animate-pulse"
-            )}>
-              {displayValue}
+            {/* Value */}
+            <div className="flex items-baseline gap-1">
+              {prefix && (
+                <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black text-white drop-shadow-2xl">
+                  {prefix}
+                </span>
+              )}
+              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white drop-shadow-2xl truncate">
+                {typeof value === 'number' ? value.toLocaleString() : value}
+              </h3>
             </div>
 
-            {/* Trend indicator */}
+            {/* Trend */}
             {trend && (
               <div className={cn(
-                "inline-flex items-center gap-1.5 px-2 py-1 rounded-full",
-                "backdrop-blur-sm transition-all duration-300",
-                trend.isPositive 
-                  ? "bg-green-500/30 text-green-100" 
-                  : "bg-red-500/30 text-red-100"
+                "inline-flex items-center gap-1 px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold backdrop-blur-md",
+                trend.isPositive
+                  ? "bg-white/20 text-white"
+                  : "bg-white/20 text-white"
               )}>
-                {trend.isPositive ? (
-                  <TrendingUp className="h-3 w-3" />
-                ) : (
-                  <TrendingDown className="h-3 w-3" />
-                )}
-                <span className="font-bold text-xs">{Math.abs(trend.value)}%</span>
+                <span className={trend.isPositive ? "text-green-300" : "text-red-300"}>
+                  {trend.isPositive ? "↑" : "↓"}
+                </span>
+                <span className="drop-shadow">{Math.abs(trend.value)}%</span>
               </div>
             )}
           </div>
 
-          {/* Icon container with advanced effects */}
-          <div className="relative flex-shrink-0">
-            {/* Outer glow ring */}
-            <div className={cn(
-              "absolute -inset-2 rounded-2xl blur-xl opacity-0 transition-all duration-500",
-              "group-hover:opacity-60 bg-white/30"
-            )} />
-
-            {/* Icon background */}
-            <div className={cn(
-              "relative h-12 w-12 sm:h-14 sm:w-14 rounded-xl flex items-center justify-center",
-              "bg-white/20 backdrop-blur-xl shadow-2xl",
-              "border border-white/30",
-              "transform transition-all duration-500",
-              "group-hover:scale-110 group-hover:rotate-6",
-              "group-hover:bg-white/30"
-            )}>
-              <Icon className={cn(
-                "h-6 w-6 sm:h-7 sm:w-7 text-white drop-shadow-2xl",
-                "transition-all duration-500"
-              )} />
+          {/* Icon */}
+          <div className="flex-shrink-0">
+            <div className="p-2 sm:p-2.5 md:p-3 bg-white/20 rounded-lg sm:rounded-xl backdrop-blur-md group-hover:bg-white/30 transition-colors duration-300 shadow-lg">
+              <Icon className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 text-white drop-shadow-lg" />
             </div>
           </div>
         </div>
-
-        {/* Floating particles */}
-        {isHovered && (
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-8 right-12 w-3 h-3 bg-white/60 rounded-full animate-ping" />
-            <div className="absolute bottom-12 left-10 w-2 h-2 bg-white/40 rounded-full animate-ping animation-delay-200" />
-            <div className="absolute top-20 left-6 w-2 h-2 bg-white/50 rounded-full animate-ping animation-delay-400" />
-            <div className="absolute bottom-8 right-8 w-1.5 h-1.5 bg-white/30 rounded-full animate-ping animation-delay-600" />
-          </div>
-        )}
-
-        {/* Bottom gradient line */}
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent" />
       </CardContent>
     </Card>
   );

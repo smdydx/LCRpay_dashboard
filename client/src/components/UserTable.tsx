@@ -33,20 +33,20 @@ export function UserTable({ users = [] }: UserTableProps) {
   const [userType, setUserType] = useState<UserType>("All");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
-  const filteredUsers = (users || []).filter(user => 
+  const filteredUsers = (users || []).filter(user =>
     userType === "All" ? true : user.userType === userType
   );
 
   const sortedUsers = [...filteredUsers].sort((a, b) => {
-    return sortOrder === "asc" 
-      ? a.rechargeAmount - b.rechargeAmount 
+    return sortOrder === "asc"
+      ? a.rechargeAmount - b.rechargeAmount
       : b.rechargeAmount - a.rechargeAmount;
   });
 
   return (
     <Card className="border-border/50 shadow-xl bg-card/50 backdrop-blur-sm hover:shadow-2xl transition-all duration-500">
-      <CardHeader>
-        <div className="flex items-center justify-between">
+      <CardHeader className="p-4 md:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <CardTitle className="flex items-center gap-2 text-xl">
               <Users className="h-5 w-5 text-blue-500" />

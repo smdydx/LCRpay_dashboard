@@ -180,51 +180,37 @@ const statCards = [
 
 export default function Dashboard() {
   return (
-    <div className="p-6 space-y-6 animate-fade-in">
-      <div className="mb-8">
-        <h2 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent animate-slide-in-up">Dashboard</h2>
-        <p className="text-muted-foreground mt-2 animate-slide-in-up" style={{ animationDelay: "0.1s" }}>
+    <div className="p-4 md:p-6 space-y-4 md:space-y-6 animate-fade-in">
+      <div className="mb-4 md:mb-8">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent animate-slide-in-up">Dashboard</h2>
+        <p className="text-sm md:text-base text-muted-foreground mt-2 animate-slide-in-up" style={{ animationDelay: "0.1s" }}>
           Welcome back! Here's what's happening today.
         </p>
       </div>
 
-      {/* Swipeable Carousel - 4 Cards per Row */}
-      <div className="relative w-full -mx-2">
-        <Carousel
-          opts={{
-            align: "start",
-            loop: false,
-            slidesToScroll: 1,
-            containScroll: "trimSnaps",
-          }}
-          className="w-full px-2"
-        >
-          <CarouselContent className="-ml-3">
-            {statCards.map((card, index) => (
-              <CarouselItem 
-                key={index} 
-                className="pl-3 basis-full sm:basis-1/2 xl:basis-1/4"
-                style={{
-                  animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
-                }}
-              >
-                <div className="h-[140px]">
-                  <StatCard
-                    title={card.title}
-                    value={card.value}
-                    icon={card.icon}
-                    trend={card.trend}
-                    gradient={card.gradient}
-                  />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+      {/* Responsive Grid Layout for Stat Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+        {statCards.map((card, index) => (
+          <div 
+            key={index}
+            className="w-full"
+            style={{
+              animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
+            }}
+          >
+            <StatCard
+              title={card.title}
+              value={card.value}
+              icon={card.icon}
+              trend={card.trend}
+              gradient={card.gradient}
+            />
+          </div>
+        ))}
       </div>
 
       {/* Recent Activity Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 md:gap-6 mt-6 md:mt-8">
         <UserTable users={sampleUsers} />
         <BBPSTable services={sampleServices} />
       </div>

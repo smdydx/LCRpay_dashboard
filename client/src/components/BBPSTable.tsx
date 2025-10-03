@@ -43,17 +43,17 @@ export function BBPSTable({ services = [] }: BBPSTableProps) {
   });
 
   return (
-    <Card className="border-border/50 shadow-xl bg-card/50 backdrop-blur-sm hover:shadow-2xl transition-all duration-500">
-      <CardHeader>
-        <div className="flex items-center justify-between">
+    <Card className="border-border/50 shadow-xl bg-card/50 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
+      <CardHeader className="p-4 md:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <CardTitle className="flex items-center gap-2 text-xl">
-              <Receipt className="h-5 w-5 text-green-500" />
+            <CardTitle className="flex items-center gap-2 text-base md:text-lg">
+              <Receipt className="h-4 w-4 md:h-5 md:w-5 text-primary" />
               Recent BBPS Transactions
             </CardTitle>
             <CardDescription>Bill payments and utility services</CardDescription>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap justify-center sm:justify-start">
             <Button
               variant={statusFilter === "All" ? "default" : "outline"}
               size="sm"
@@ -81,8 +81,8 @@ export function BBPSTable({ services = [] }: BBPSTableProps) {
           </div>
         </div>
       </CardHeader>
-      <CardContent>
-        <div className="rounded-lg border border-border/50 overflow-hidden">
+      <CardContent className="p-0">
+        <div className="rounded-lg border-none overflow-hidden">
           <Table>
             <TableHeader>
               <TableRow>
@@ -94,7 +94,7 @@ export function BBPSTable({ services = [] }: BBPSTableProps) {
                     variant="ghost"
                     size="sm"
                     onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
-                    className="hover:bg-transparent"
+                    className="hover:bg-transparent p-0 h-auto"
                   >
                     Amount
                     <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -106,12 +106,12 @@ export function BBPSTable({ services = [] }: BBPSTableProps) {
               {sortedServices.map((service) => (
                 <TableRow key={service.id} className="hover:bg-accent/50 transition-colors">
                   <TableCell>
-                    <div>
-                      <p className="font-medium">{service.serviceName}</p>
-                      <p className="text-sm text-muted-foreground">{service.category}</p>
+                    <div className="flex flex-col">
+                      <p className="font-medium text-sm md:text-base">{service.serviceName}</p>
+                      <p className="text-xs md:text-sm text-muted-foreground">{service.category}</p>
                     </div>
                   </TableCell>
-                  <TableCell className="font-medium">{service.provider}</TableCell>
+                  <TableCell className="font-medium text-sm md:text-base">{service.provider}</TableCell>
                   <TableCell>
                     <Badge
                       variant={
@@ -121,12 +121,12 @@ export function BBPSTable({ services = [] }: BBPSTableProps) {
                           ? "secondary"
                           : "destructive"
                       }
-                      className="font-semibold"
+                      className="font-semibold text-xs md:text-sm"
                     >
                       {service.status}
                     </Badge>
                   </TableCell>
-                  <TableCell className="font-bold text-lg">
+                  <TableCell className="font-bold text-sm md:text-lg text-right">
                     ₹{service.amount.toLocaleString()}
                   </TableCell>
                 </TableRow>

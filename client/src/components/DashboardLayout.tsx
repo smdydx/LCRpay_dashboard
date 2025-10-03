@@ -30,23 +30,23 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       <div className="flex h-screen w-full">
         <AppSidebar />
         <div className="flex flex-col flex-1">
-          <header className="flex items-center justify-between px-6 py-4 border-b border-border/50 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 backdrop-blur-xl sticky top-0 z-50 shadow-lg">
-            <div className="flex items-center gap-4 animate-slide-in-right">
+          <header className="flex items-center justify-between px-3 md:px-6 py-3 md:py-4 border-b border-border/50 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 backdrop-blur-xl sticky top-0 z-50 shadow-lg">
+            <div className="flex items-center gap-2 md:gap-4 animate-slide-in-right">
               <SidebarTrigger data-testid="button-sidebar-toggle" className="hover-elevate" />
-              <div className="flex items-center gap-3">
-                <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-2xl animate-scale-in hover:scale-110 transition-transform duration-300">
-                  <BarChart3 className="h-6 w-6 text-white" />
+              <div className="flex items-center gap-2 md:gap-3">
+                <div className="h-9 w-9 md:h-11 md:w-11 rounded-lg md:rounded-xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-2xl animate-scale-in hover:scale-110 transition-transform duration-300">
+                  <BarChart3 className="h-4 w-4 md:h-6 md:w-6 text-white" />
                 </div>
-                <div>
-                  <h1 className="text-xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                <div className="hidden sm:block">
+                  <h1 className="text-base md:text-xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                     Analytics Dashboard
                   </h1>
-                  <p className="text-xs text-muted-foreground">Professional Business Suite</p>
+                  <p className="text-[10px] md:text-xs text-muted-foreground">Professional Business Suite</p>
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-3 animate-slide-in-right" style={{ animationDelay: "0.1s" }}>
-              <div className="relative hidden md:block">
+            <div className="flex items-center gap-2 md:gap-3 animate-slide-in-right" style={{ animationDelay: "0.1s" }}>
+              <div className="relative hidden lg:block">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Search anything..."
