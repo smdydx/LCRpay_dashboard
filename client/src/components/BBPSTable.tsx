@@ -6,9 +6,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowUpDown, CreditCard } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ArrowUpDown, Receipt } from "lucide-react";
 import { useState } from "react";
 
 type StatusFilter = "All" | "Success" | "Pending" | "Failed";
@@ -28,110 +29,112 @@ interface BBPSTableProps {
 }
 
 export function BBPSTable({ services }: BBPSTableProps) {
-  const [filter, setFilter] = useState<StatusFilter>("All");
-  const [sortField, setSortField] = useState<keyof BBPSService | null>(null);
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [filterStatus, setFilterStatus] = useState<StatusFilter>("All");
 
-  const handleSort = (field: keyof BBPSService) => {
-    if (sortField === field) {
-      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-    } else {
-      setSortField(field);
-      setSortOrder("asc");
-    }
-  };
-
-  const filteredServices = services.filter(service => {
-    if (filter === "All") return true;
-    return service.status === filter;
-  });
+  const filteredServices = services.filter(service =>
+    filterStatus === "All" ? true : service.status === filterStatus
+  );
 
   const sortedServices = [...filteredServices].sort((a, b) => {
-    if (!sortField) return 0;
-    const aValue = a[sortField];
-    const bValue = b[sortField];
-    const order = sortOrder === "asc" ? 1 : -1;
-    return aValue > bValue ? order : -order;
+    return sortOrder === "asc"
+      ? a.amount - b.amount
+      : b.amount - a.amount;
   });
 
-  const getStatusVariant = (status: string) => {
-    switch (status) {
-      case "Success": return "default";
-      case "Pending": return "secondary";
-      case "Failed": return "destructive";
-      default: return "secondary";
-    }
-  };
-
   return (
-    <div className="space-y-4 animate-slide-in-right" style={{ animationDelay: "0.1s" }}>
-      <div className="flex items-center justify-between">
-        <h3 className="text-xl font-semibold flex items-center gap-2">
-          <CreditCard className="h-5 w-5 text-purple-500" />
-          BBPS Transactions
-        </h3>
-        <Badge variant="secondary" className="text-xs">
-          {filteredServices.length} {filteredServices.length === 1 ? "Transaction" : "Transactions"}
-        </Badge>
-      </div>
-      
-      <div className="flex gap-2 flex-wrap">
-        {(["All", "Success", "Pending", "Failed"] as StatusFilter[]).map((type) => (
-          <Button
-            key={type}
-            variant={filter === type ? "default" : "outline"}
-            size="sm"
-            onClick={() => setFilter(type)}
-            data-testid={`button-filter-${type.toLowerCase()}`}
-            className="hover-elevate transition-all duration-300"
-          >
-            {type}
-          </Button>
-        ))}
-      </div>
-
-      <div className="rounded-xl border border-border/50 overflow-hidden shadow-xl bg-card/50 backdrop-blur-sm">
-        <Table>
-          <TableHeader>
-            <TableRow className="bg-card hover:bg-card">
-              <TableHead className="font-medium">
-                <Button variant="ghost" size="sm" onClick={() => handleSort("serviceName")} data-testid="button-sort-service" className="hover-elevate -ml-3">
-                  Service <ArrowUpDown className="ml-2 h-3 w-3" />
-                </Button>
-              </TableHead>
-              <TableHead className="font-medium">Category</TableHead>
-              <TableHead className="font-medium">Provider</TableHead>
-              <TableHead className="font-medium">
-                <Button variant="ghost" size="sm" onClick={() => handleSort("amount")} data-testid="button-sort-amount" className="hover-elevate -ml-3">
-                  Amount <ArrowUpDown className="ml-2 h-3 w-3" />
-                </Button>
-              </TableHead>
-              <TableHead className="font-medium">Status</TableHead>
-              <TableHead className="font-medium">
-                <Button variant="ghost" size="sm" onClick={() => handleSort("transactionDate")} data-testid="button-sort-date" className="hover-elevate -ml-3">
-                  Date <ArrowUpDown className="ml-2 h-3 w-3" />
-                </Button>
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {sortedServices.map((service) => (
-              <TableRow key={service.id} className="hover-elevate" data-testid={`row-service-${service.id}`}>
-                <TableCell className="font-medium" data-testid={`text-service-${service.id}`}>{service.serviceName}</TableCell>
-                <TableCell className="text-muted-foreground">{service.category}</TableCell>
-                <TableCell className="text-muted-foreground">{service.provider}</TableCell>
-                <TableCell className="font-mono" data-testid={`text-amount-${service.id}`}>₹{service.amount.toLocaleString()}</TableCell>
-                <TableCell>
-                  <Badge variant={getStatusVariant(service.status)} className={service.status === "Success" ? "bg-chart-2 hover:bg-chart-2" : ""} data-testid={`badge-status-${service.id}`}>
-                    {service.status}
-                  </Badge>
-                </TableCell>
-                <TableCell className="text-muted-foreground" data-testid={`text-date-${service.id}`}>{service.transactionDate}</TableCell>
+    <Card className="border-border/50 shadow-xl bg-card/50 backdrop-blur-sm hover:shadow-2xl transition-all duration-500">
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle className="flex items-center gap-2 text-xl">
+              <Receipt className="h-5 w-5 text-green-500" />
+              Recent BBPS Transactions
+            </CardTitle>
+            <CardDescription>Bill payments and utility services</CardDescription>
+          </div>
+          <div className="flex gap-2">
+            <Button
+              variant={filterStatus === "All" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setFilterStatus("All")}
+              className="hover-elevate"
+            >
+              All
+            </Button>
+            <Button
+              variant={filterStatus === "Success" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setFilterStatus("Success")}
+              className="hover-elevate"
+            >
+              Success
+            </Button>
+            <Button
+              variant={filterStatus === "Pending" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setFilterStatus("Pending")}
+              className="hover-elevate"
+            >
+              Pending
+            </Button>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <div className="rounded-lg border border-border/50 overflow-hidden">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Service</TableHead>
+                <TableHead>Provider</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
+                    className="hover:bg-transparent"
+                  >
+                    Amount
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-    </div>
+            </TableHeader>
+            <TableBody>
+              {sortedServices.map((service) => (
+                <TableRow key={service.id} className="hover:bg-accent/50 transition-colors">
+                  <TableCell>
+                    <div>
+                      <p className="font-medium">{service.serviceName}</p>
+                      <p className="text-sm text-muted-foreground">{service.category}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell className="font-medium">{service.provider}</TableCell>
+                  <TableCell>
+                    <Badge
+                      variant={
+                        service.status === "Success"
+                          ? "default"
+                          : service.status === "Pending"
+                          ? "secondary"
+                          : "destructive"
+                      }
+                      className="font-semibold"
+                    >
+                      {service.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="font-bold text-lg">
+                    ₹{service.amount.toLocaleString()}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </CardContent>
+    </Card>
   );
 }

@@ -1,7 +1,7 @@
 import { StatCard } from "@/components/StatCard";
 import { UserTable } from "@/components/UserTable";
 import { BBPSTable } from "@/components/BBPSTable";
-import { Users, CreditCard, TrendingUp, DollarSign } from "lucide-react";
+import { Users, Zap, DollarSign, TrendingUp, Crown, Smartphone, Receipt, CheckCircle, Clock } from "lucide-react";
 
 const sampleUsers = [
   {
@@ -114,37 +114,74 @@ export default function Dashboard() {
         </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {/* Statistics Cards Grid - 9 Cards like requested */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <StatCard
-          title="Total Users"
-          value="2,847"
-          icon={Users}
+          title="Total Transactions"
+          value="45,892"
+          icon={DollarSign}
           trend={{ value: 12.5, isPositive: true }}
           gradient="from-blue-500 to-cyan-500"
         />
         <StatCard
-          title="Transactions"
-          value="1,234"
-          icon={CreditCard}
+          title="Total Revenue"
+          value="₹89,45,231"
+          icon={TrendingUp}
+          trend={{ value: 15.3, isPositive: true }}
+          gradient="from-green-500 to-emerald-500"
+        />
+        <StatCard
+          title="Total Users"
+          value="15,847"
+          icon={Users}
           trend={{ value: 8.2, isPositive: true }}
           gradient="from-purple-500 to-pink-500"
         />
         <StatCard
-          title="Revenue"
-          value="₹45,231"
-          icon={DollarSign}
-          trend={{ value: 3.1, isPositive: false }}
-          gradient="from-orange-500 to-red-500"
+          title="Prime Users"
+          value="3,421"
+          icon={Crown}
+          trend={{ value: 18.7, isPositive: true }}
+          gradient="from-yellow-500 to-orange-500"
         />
         <StatCard
-          title="Growth"
-          value="23.5%"
-          icon={TrendingUp}
-          trend={{ value: 5.4, isPositive: true }}
-          gradient="from-green-500 to-emerald-500"
+          title="Total Recharges"
+          value="28,456"
+          icon={Smartphone}
+          trend={{ value: 10.4, isPositive: true }}
+          gradient="from-indigo-500 to-blue-500"
+        />
+        <StatCard
+          title="BBPS Payments"
+          value="12,234"
+          icon={Receipt}
+          trend={{ value: 14.8, isPositive: true }}
+          gradient="from-pink-500 to-rose-500"
+        />
+        <StatCard
+          title="Success Rate"
+          value="98.7%"
+          icon={CheckCircle}
+          trend={{ value: 2.1, isPositive: true }}
+          gradient="from-emerald-500 to-teal-500"
+        />
+        <StatCard
+          title="Pending Payments"
+          value="234"
+          icon={Clock}
+          trend={{ value: 5.3, isPositive: false }}
+          gradient="from-orange-500 to-amber-500"
+        />
+        <StatCard
+          title="Today's Revenue"
+          value="₹2,45,890"
+          icon={Zap}
+          trend={{ value: 22.4, isPositive: true }}
+          gradient="from-violet-500 to-purple-500"
         />
       </div>
 
+      {/* Recent Activity Section */}
       <div className="grid gap-6 lg:grid-cols-2">
         <UserTable users={sampleUsers} />
         <BBPSTable services={sampleServices} />
