@@ -33,7 +33,7 @@ export function UserTable({ users = [] }: UserTableProps) {
   const [userType, setUserType] = useState<UserType>("All");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
-  const filteredUsers = users.filter(user => 
+  const filteredUsers = (users || []).filter(user => 
     userType === "All" ? true : user.userType === userType
   );
 
