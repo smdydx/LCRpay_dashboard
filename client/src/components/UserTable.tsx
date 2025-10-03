@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Users } from "lucide-react";
 import { useState } from "react";
 
 type UserType = "All" | "Prime" | "Normal";
