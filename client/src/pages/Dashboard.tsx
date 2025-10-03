@@ -215,8 +215,6 @@ export default function Dashboard() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden lg:flex -left-12" />
-          <CarouselNext className="hidden lg:flex -right-12" />
         </Carousel>
       </div>
 
