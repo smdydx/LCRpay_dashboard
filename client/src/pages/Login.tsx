@@ -26,21 +26,28 @@ export default function Login() {
 
     setTimeout(() => {
       if (username === TEMP_USERNAME && password === TEMP_PASSWORD) {
+        // First set authentication
         localStorage.setItem("isAuthenticated", "true");
+        
+        // Then show success message
         toast({
           title: "Login Successful",
           description: "Welcome back, Admin!",
         });
-        setLocation("/");
+        
+        // Small delay before redirect to ensure localStorage is set
+        setTimeout(() => {
+          setLocation("/");
+        }, 100);
       } else {
         toast({
           title: "Login Failed",
           description: "Invalid username or password",
           variant: "destructive",
         });
+        setLoading(false);
       }
-      setLoading(false);
-    }, 1000);
+    }, 500);
   };
 
   return (
