@@ -188,40 +188,64 @@ export default function Dashboard() {
         </p>
       </div>
 
-      {/* Professional Card Carousel - 4 cards visible on desktop */}
-      <div className="relative px-12">
-        <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-            slidesToScroll: 1,
-          }}
-          className="w-full"
-        >
-          <CarouselContent className="-ml-2 md:-ml-4">
-            {statCards.map((card, index) => (
-              <CarouselItem 
-                key={index} 
-                className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
-                style={{
-                  animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
-                }}
-              >
-                <div className="h-full transform transition-all duration-500 hover:scale-105">
-                  <StatCard
-                    title={card.title}
-                    value={card.value}
-                    icon={card.icon}
-                    trend={card.trend}
-                    gradient={card.gradient}
-                  />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="hidden lg:flex -left-6 bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 hover:from-blue-600 hover:to-purple-600 shadow-2xl transform transition-all duration-300 hover:scale-110" />
-          <CarouselNext className="hidden lg:flex -right-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 hover:from-purple-600 hover:to-pink-600 shadow-2xl transform transition-all duration-300 hover:scale-110" />
-        </Carousel>
+      {/* Professional Card Grid - 4 cards visible on desktop, carousel on mobile */}
+      <div className="relative">
+        {/* Mobile/Tablet Carousel (< 1024px) */}
+        <div className="block lg:hidden px-12">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+              slidesToScroll: 1,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {statCards.map((card, index) => (
+                <CarouselItem 
+                  key={index} 
+                  className="pl-2 md:pl-4 basis-full sm:basis-1/2"
+                  style={{
+                    animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
+                  }}
+                >
+                  <div className="h-full transform transition-all duration-500 hover:scale-105">
+                    <StatCard
+                      title={card.title}
+                      value={card.value}
+                      icon={card.icon}
+                      trend={card.trend}
+                      gradient={card.gradient}
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="-left-6 bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 hover:from-blue-600 hover:to-purple-600 shadow-2xl transform transition-all duration-300 hover:scale-110" />
+            <CarouselNext className="-right-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 hover:from-purple-600 hover:to-pink-600 shadow-2xl transform transition-all duration-300 hover:scale-110" />
+          </Carousel>
+        </div>
+
+        {/* Desktop Grid (>= 1024px) - 4 cards per row, no carousel */}
+        <div className="hidden lg:grid lg:grid-cols-4 gap-6">
+          {statCards.map((card, index) => (
+            <div 
+              key={index}
+              className="transform transition-all duration-500 hover:scale-105"
+              style={{
+                animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
+              }}
+            >
+              <StatCard
+                title={card.title}
+                value={card.value}
+                icon={card.icon}
+                trend={card.trend}
+                gradient={card.gradient}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Recent Activity Section */}
