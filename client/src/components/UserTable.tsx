@@ -44,22 +44,23 @@ export function UserTable({ users = [] }: UserTableProps) {
   });
 
   return (
-    <Card className="border-border/50 shadow-xl bg-card/50 backdrop-blur-sm hover:shadow-2xl transition-all duration-500">
+    <Card className="border-border/50 shadow-xl bg-card/50 backdrop-blur-sm hover:shadow-2xl transition-all duration-700 group">
       <CardHeader className="p-4 md:p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <CardTitle className="flex items-center gap-2 text-xl">
-              <Users className="h-5 w-5 text-blue-500" />
+          <div className="space-y-1">
+            <CardTitle className="flex items-center gap-2 text-xl group-hover:text-blue-600 transition-colors duration-300">
+              <Users className="h-5 w-5 text-blue-500 animate-bounce-subtle" />
               Active Users
             </CardTitle>
-            <CardDescription>Recent user activity and transactions</CardDescription>
+            <CardDescription className="text-xs sm:text-sm">Recent user activity and transactions</CardDescription>
           </div>
           <div className="flex gap-2">
             <Button
               variant={userType === "All" ? "default" : "outline"}
               size="sm"
               onClick={() => setUserType("All")}
-              className="hover-elevate"
+              className="hover-elevate transition-all duration-300"
+              data-testid="button-filter-all"
             >
               All
             </Button>
@@ -67,7 +68,8 @@ export function UserTable({ users = [] }: UserTableProps) {
               variant={userType === "Prime" ? "default" : "outline"}
               size="sm"
               onClick={() => setUserType("Prime")}
-              className="hover-elevate"
+              className="hover-elevate transition-all duration-300"
+              data-testid="button-filter-prime"
             >
               Prime
             </Button>
@@ -75,27 +77,29 @@ export function UserTable({ users = [] }: UserTableProps) {
               variant={userType === "Normal" ? "default" : "outline"}
               size="sm"
               onClick={() => setUserType("Normal")}
-              className="hover-elevate"
+              className="hover-elevate transition-all duration-300"
+              data-testid="button-filter-normal"
             >
               Normal
             </Button>
           </div>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-0">
         <div className="rounded-lg border border-border/50 overflow-hidden">
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead>Status</TableHead>
+              <TableRow className="hover:bg-accent/30 transition-colors duration-200">
+                <TableHead className="font-bold">Name</TableHead>
+                <TableHead className="font-bold">Type</TableHead>
+                <TableHead className="font-bold">Status</TableHead>
                 <TableHead>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
-                    className="hover:bg-transparent"
+                    className="hover:bg-transparent font-bold transition-transform duration-200 hover:scale-105"
+                    data-testid="button-sort-amount"
                   >
                     Amount
                     <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -104,25 +108,38 @@ export function UserTable({ users = [] }: UserTableProps) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {sortedUsers.map((user) => (
-                <TableRow key={user.id} className="hover:bg-accent/50 transition-colors">
+              {sortedUsers.map((user, index) => (
+                <TableRow 
+                  key={user.id} 
+                  className="hover:bg-accent/50 transition-all duration-300 hover:scale-[1.01]"
+                  style={{ animation: `fade-in 0.4s ease-out ${index * 0.1}s both` }}
+                  data-testid={`row-user-${user.id}`}
+                >
                   <TableCell>
                     <div>
-                      <p className="font-medium">{user.name}</p>
-                      <p className="text-sm text-muted-foreground">{user.phone}</p>
+                      <p className="font-medium text-sm md:text-base">{user.name}</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground">{user.phone}</p>
                     </div>
                   </TableCell>
                   <TableCell>
-                    <Badge variant={user.userType === "Prime" ? "default" : "secondary"} className="font-semibold">
+                    <Badge 
+                      variant={user.userType === "Prime" ? "default" : "secondary"} 
+                      className="font-semibold transition-all duration-300 hover:scale-110"
+                      data-testid={`badge-type-${user.id}`}
+                    >
                       {user.userType}
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <Badge variant={user.status === "Active" ? "default" : "secondary"}>
+                    <Badge 
+                      variant={user.status === "Active" ? "default" : "secondary"}
+                      className="transition-all duration-300 hover:scale-110"
+                      data-testid={`badge-status-${user.id}`}
+                    >
                       {user.status}
                     </Badge>
                   </TableCell>
-                  <TableCell className="font-bold text-lg">
+                  <TableCell className="font-bold text-base md:text-lg" data-testid={`text-amount-${user.id}`}>
                     ₹{user.rechargeAmount.toLocaleString()}
                   </TableCell>
                 </TableRow>

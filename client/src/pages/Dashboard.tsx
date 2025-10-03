@@ -181,18 +181,18 @@ const statCards = [
 export default function Dashboard() {
   return (
     <div className="p-4 sm:p-5 md:p-6 lg:p-8 space-y-6 md:space-y-8 animate-fade-in">
-      {/* Header Section */}
-      <div className="mb-4 md:mb-6">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent animate-slide-in-up">
+      {/* Header Section with gradient animation */}
+      <div className="mb-4 md:mb-6 animate-slide-in-up">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient">
           Dashboard
         </h2>
-        <p className="text-sm md:text-base text-muted-foreground mt-2 animate-slide-in-up" style={{ animationDelay: "0.1s" }}>
+        <p className="text-sm md:text-base text-muted-foreground mt-2" style={{ animation: "slide-in-up 0.7s ease-out 0.1s both" }}>
           Welcome back! Here's what's happening today.
         </p>
       </div>
 
-      {/* Stats Carousel - 1 row with 4 cards, swipeable */}
-      <div className="relative px-12">
+      {/* Stats Carousel with stagger animation */}
+      <div className="relative px-12 animate-scale-in" style={{ animationDelay: "0.2s" }}>
         <Carousel
           opts={{
             align: "start",
@@ -206,34 +206,46 @@ export default function Dashboard() {
                 key={index} 
                 className="pl-4 md:pl-5 lg:pl-6 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                 data-testid={`card-${card.title.toLowerCase().replace(/\s+/g, '-')}`}
+                style={{
+                  animation: `slideInFromBottom 0.6s ease-out ${0.3 + index * 0.08}s both`,
+                }}
               >
-                <div
-                  style={{
-                    animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
-                  }}
-                >
-                  <StatCard
-                    title={card.title}
-                    value={card.value}
-                    icon={card.icon}
-                    trend={card.trend}
-                    gradient={card.gradient}
-                  />
-                </div>
+                <StatCard
+                  title={card.title}
+                  value={card.value}
+                  icon={card.icon}
+                  trend={card.trend}
+                  gradient={card.gradient}
+                />
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden sm:flex -left-6" data-testid="button-carousel-previous" />
-          <CarouselNext className="hidden sm:flex -right-6" data-testid="button-carousel-next" />
+          <CarouselPrevious 
+            className="hidden sm:flex -left-6 hover-elevate transition-all duration-300 hover:scale-110" 
+            data-testid="button-carousel-previous" 
+          />
+          <CarouselNext 
+            className="hidden sm:flex -right-6 hover-elevate transition-all duration-300 hover:scale-110" 
+            data-testid="button-carousel-next" 
+          />
         </Carousel>
       </div>
 
-      {/* Details Section - User Table and BBPS Table */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 md:gap-5 lg:gap-6 mt-8">
-        <div className="w-full">
+      {/* Details Section with fade-in animation */}
+      <div 
+        className="grid grid-cols-1 xl:grid-cols-2 gap-4 md:gap-5 lg:gap-6 mt-8"
+        style={{ animation: "fade-in 0.8s ease-out 1s both" }}
+      >
+        <div 
+          className="w-full"
+          style={{ animation: "slide-in-right 0.7s ease-out 1.1s both" }}
+        >
           <UserTable users={sampleUsers} />
         </div>
-        <div className="w-full">
+        <div 
+          className="w-full"
+          style={{ animation: "slide-in-right 0.7s ease-out 1.2s both" }}
+        >
           <BBPSTable services={sampleServices} />
         </div>
       </div>
