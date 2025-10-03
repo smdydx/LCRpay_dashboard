@@ -60,10 +60,10 @@ export function StatCard({ title, value, icon: Icon, trend, className, gradient 
   return (
     <Card
       className={cn(
-        "relative overflow-hidden group cursor-pointer border-0",
-        "transition-all duration-700 ease-out",
+        "relative overflow-hidden group cursor-pointer border-0 h-full",
+        "transition-all duration-500 ease-out",
         "hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)]",
-        "transform hover:-translate-y-3 hover:scale-[1.03]",
+        "transform hover:-translate-y-2 hover:scale-105",
         className
       )}
       onMouseEnter={() => setIsHovered(true)}
@@ -107,20 +107,19 @@ export function StatCard({ title, value, icon: Icon, trend, className, gradient 
         <div className="absolute bottom-0 right-0 w-32 h-32 bg-white rounded-full blur-3xl" />
       </div>
 
-      <CardContent className="p-4 relative z-10">
-        <div className="flex items-start justify-between gap-3">
-          <div className="space-y-3 flex-1">
+      <CardContent className="p-4 sm:p-5 relative z-10">
+        <div className="flex items-start justify-between gap-2">
+          <div className="space-y-2 flex-1 min-w-0">
             {/* Title */}
-            <p className="text-xs font-bold text-white/90 uppercase tracking-wider drop-shadow-lg">
+            <p className="text-xs font-bold text-white/90 uppercase tracking-wider drop-shadow-lg truncate">
               {title}
             </p>
 
             {/* Value with enhanced styling */}
             <div className={cn(
-              "text-3xl font-black tracking-tight transition-all duration-500",
-              "text-white drop-shadow-2xl",
-              isAnimating && "animate-pulse",
-              isHovered && "scale-110"
+              "text-2xl sm:text-3xl font-black tracking-tight transition-all duration-500",
+              "text-white drop-shadow-2xl truncate",
+              isAnimating && "animate-pulse"
             )}>
               {displayValue}
             </div>
@@ -129,16 +128,15 @@ export function StatCard({ title, value, icon: Icon, trend, className, gradient 
             {trend && (
               <div className={cn(
                 "inline-flex items-center gap-1.5 px-2 py-1 rounded-full",
-                "backdrop-blur-sm transition-all duration-500",
+                "backdrop-blur-sm transition-all duration-300",
                 trend.isPositive 
                   ? "bg-green-500/30 text-green-100" 
-                  : "bg-red-500/30 text-red-100",
-                isHovered && "scale-110 shadow-lg"
+                  : "bg-red-500/30 text-red-100"
               )}>
                 {trend.isPositive ? (
-                  <TrendingUp className="h-3 w-3 animate-bounce" />
+                  <TrendingUp className="h-3 w-3" />
                 ) : (
-                  <TrendingDown className="h-3 w-3 animate-bounce" />
+                  <TrendingDown className="h-3 w-3" />
                 )}
                 <span className="font-bold text-xs">{Math.abs(trend.value)}%</span>
               </div>
@@ -146,32 +144,25 @@ export function StatCard({ title, value, icon: Icon, trend, className, gradient 
           </div>
 
           {/* Icon container with advanced effects */}
-          <div className="relative">
+          <div className="relative flex-shrink-0">
             {/* Outer glow ring */}
             <div className={cn(
-              "absolute -inset-3 rounded-2xl blur-xl opacity-0 transition-all duration-700",
+              "absolute -inset-2 rounded-2xl blur-xl opacity-0 transition-all duration-500",
               "group-hover:opacity-60 bg-white/30"
-            )} />
-
-            {/* Pulsing ring */}
-            <div className={cn(
-              "absolute -inset-1 rounded-xl border-2 border-white/40",
-              "opacity-0 group-hover:opacity-100 animate-ping"
             )} />
 
             {/* Icon background */}
             <div className={cn(
-              "relative h-16 w-16 rounded-2xl flex items-center justify-center",
+              "relative h-12 w-12 sm:h-14 sm:w-14 rounded-xl flex items-center justify-center",
               "bg-white/20 backdrop-blur-xl shadow-2xl",
               "border border-white/30",
-              "transform transition-all duration-700",
-              "group-hover:scale-110 group-hover:rotate-12",
+              "transform transition-all duration-500",
+              "group-hover:scale-110 group-hover:rotate-6",
               "group-hover:bg-white/30"
             )}>
               <Icon className={cn(
-                "h-8 w-8 text-white drop-shadow-2xl",
-                "transition-all duration-700",
-                isHovered && "scale-125 rotate-12"
+                "h-6 w-6 sm:h-7 sm:w-7 text-white drop-shadow-2xl",
+                "transition-all duration-500"
               )} />
             </div>
           </div>

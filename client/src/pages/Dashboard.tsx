@@ -188,8 +188,8 @@ export default function Dashboard() {
         </p>
       </div>
 
-      {/* Swipeable Carousel - Fully Responsive */}
-      <div className="relative w-full">
+      {/* Swipeable Carousel - 4 Cards per Row */}
+      <div className="relative w-full -mx-2">
         <Carousel
           opts={{
             align: "start",
@@ -197,24 +197,26 @@ export default function Dashboard() {
             slidesToScroll: 1,
             containScroll: "trimSnaps",
           }}
-          className="w-full"
+          className="w-full px-2"
         >
-          <CarouselContent className="gap-4 lg:gap-6">
+          <CarouselContent className="-ml-3">
             {statCards.map((card, index) => (
               <CarouselItem 
                 key={index} 
-                className="basis-[calc(100%-1rem)] sm:basis-[calc(50%-0.5rem)] lg:basis-[calc(25%-1.125rem)]"
+                className="pl-3 basis-full sm:basis-1/2 xl:basis-1/4"
                 style={{
                   animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
                 }}
               >
-                <StatCard
-                  title={card.title}
-                  value={card.value}
-                  icon={card.icon}
-                  trend={card.trend}
-                  gradient={card.gradient}
-                />
+                <div className="h-[140px]">
+                  <StatCard
+                    title={card.title}
+                    value={card.value}
+                    icon={card.icon}
+                    trend={card.trend}
+                    gradient={card.gradient}
+                  />
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>
