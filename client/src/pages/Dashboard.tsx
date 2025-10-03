@@ -188,36 +188,35 @@ export default function Dashboard() {
         </p>
       </div>
 
-      {/* Professional Card Grid - 4 cards visible on desktop, carousel on mobile */}
+      {/* Professional Card Grid - 4 cards visible on desktop, swipeable carousel on mobile */}
       <div className="relative">
-        {/* Mobile/Tablet Carousel (< 1024px) - Cards swipe, not screen */}
+        {/* Mobile/Tablet Carousel (< 1024px) - All cards swipeable */}
         <div className="block lg:hidden">
           <Carousel
             opts={{
               align: "start",
               loop: false,
               slidesToScroll: 1,
+              dragFree: true,
             }}
-            className="w-full max-w-full"
+            className="w-full"
           >
-            <CarouselContent className="-ml-4">
+            <CarouselContent className="-ml-3">
               {statCards.map((card, index) => (
                 <CarouselItem 
                   key={index} 
-                  className="pl-4 basis-[85%] sm:basis-[45%]"
+                  className="pl-3 basis-[280px] sm:basis-[calc(50%-12px)]"
                   style={{
                     animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
                   }}
                 >
-                  <div className="h-full">
-                    <StatCard
-                      title={card.title}
-                      value={card.value}
-                      icon={card.icon}
-                      trend={card.trend}
-                      gradient={card.gradient}
-                    />
-                  </div>
+                  <StatCard
+                    title={card.title}
+                    value={card.value}
+                    icon={card.icon}
+                    trend={card.trend}
+                    gradient={card.gradient}
+                  />
                 </CarouselItem>
               ))}
             </CarouselContent>
