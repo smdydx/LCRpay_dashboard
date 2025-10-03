@@ -203,7 +203,7 @@ export default function Dashboard() {
             {statCards.map((card, index) => (
               <CarouselItem 
                 key={index} 
-                className="pl-3 lg:pl-6 basis-[280px] sm:basis-[calc(50%-12px)] lg:basis-[calc(25%-18px)]"
+                className="pl-3 lg:pl-6 basis-[280px] sm:basis-1/2 lg:basis-1/4"
                 style={{
                   animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
                 }}
@@ -226,7 +226,7 @@ export default function Dashboard() {
       {/* Recent Activity Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
         <UserTable users={sampleUsers} />
-        <BBPSTable transactions={sampleServices} />
+        <BBPSTable services={sampleServices} />
       </div>
     </div>
   );
