@@ -199,11 +199,11 @@ export default function Dashboard() {
           }}
           className="w-full"
         >
-          <CarouselContent className="-ml-2 md:-ml-4">
+          <CarouselContent className="-ml-3 md:-ml-4">
             {statCards.map((card, index) => (
               <CarouselItem 
                 key={index} 
-                className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/4"
+                className="pl-3 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/4"
                 style={{
                   animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
                 }}
