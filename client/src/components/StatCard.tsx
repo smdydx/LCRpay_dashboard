@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { LucideIcon, TrendingDown, TrendingUp } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -18,7 +19,7 @@ interface StatCardProps {
 export function StatCard({ title, value, icon: Icon, trend, className, gradient }: StatCardProps) {
   const [displayValue, setDisplayValue] = useState<string>("");
   const [isAnimating, setIsAnimating] = useState(true);
-  const [isHovered, setIsHovered] = useState(false); // State for hover effect
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const valueStr = String(value);
@@ -33,7 +34,7 @@ export function StatCard({ title, value, icon: Icon, trend, className, gradient 
     }
 
     let currentValue = 0;
-    const duration = 1000;
+    const duration = 1500;
     const steps = 60;
     const increment = numericValue / steps;
     const stepDuration = duration / steps;
@@ -54,100 +55,141 @@ export function StatCard({ title, value, icon: Icon, trend, className, gradient 
     return () => clearInterval(timer);
   }, [value]);
 
-  const selectedGradient = gradient || "from-blue-500 to-cyan-500";
+  const selectedGradient = gradient || "from-violet-600 via-purple-600 to-fuchsia-600";
 
   return (
     <Card
       className={cn(
-        "relative overflow-hidden transition-all duration-500 group cursor-pointer",
-        "before:absolute before:inset-0 before:bg-gradient-to-br before:opacity-0 before:transition-opacity before:duration-500",
-        "hover:before:opacity-5 hover:shadow-2xl hover:border-primary/30",
-        "transform hover:-translate-y-2 hover:scale-[1.02]",
-        selectedGradient && `before:${selectedGradient}`,
+        "relative overflow-hidden group cursor-pointer border-0",
+        "transition-all duration-700 ease-out",
+        "hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)]",
+        "transform hover:-translate-y-3 hover:scale-[1.03]",
         className
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Animated gradient border effect */}
-      <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-        <div className={cn(
-          "absolute inset-0 rounded-xl blur-xl bg-gradient-to-br opacity-30",
-          selectedGradient
-        )} />
+      {/* Main gradient background */}
+      <div className={cn(
+        "absolute inset-0 bg-gradient-to-br opacity-90 transition-opacity duration-700",
+        selectedGradient,
+        "group-hover:opacity-100"
+      )} />
+
+      {/* Animated mesh gradient overlay */}
+      <div className={cn(
+        "absolute inset-0 bg-gradient-to-tr opacity-0 transition-all duration-700",
+        "group-hover:opacity-30",
+        gradient === "from-blue-500 to-cyan-500" ? "from-cyan-400 to-blue-600" :
+        gradient === "from-green-500 to-emerald-500" ? "from-emerald-400 to-green-600" :
+        gradient === "from-orange-500 to-red-500" ? "from-red-400 to-orange-600" :
+        "from-fuchsia-400 to-violet-600"
+      )} />
+
+      {/* Shimmer animation */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1500 ease-out">
+          <div className="h-full w-32 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12" />
+        </div>
       </div>
 
-      {/* Shimmer effect */}
-      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out">
-        <div className="h-full w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12" />
+      {/* Glowing border effect */}
+      <div className={cn(
+        "absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500",
+        "before:absolute before:inset-0 before:rounded-xl before:p-[2px]",
+        "before:bg-gradient-to-br before:from-white/50 before:to-transparent",
+        "before:-z-10"
+      )} />
+
+      {/* Background pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-0 left-0 w-40 h-40 bg-white rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-32 h-32 bg-white rounded-full blur-3xl" />
       </div>
 
-      <CardContent className="p-6 relative z-10">
-        <div className="flex items-start justify-between">
-          <div className="space-y-3 flex-1">
-            <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+      <CardContent className="p-7 relative z-10">
+        <div className="flex items-start justify-between gap-4">
+          <div className="space-y-4 flex-1">
+            {/* Title */}
+            <p className="text-sm font-bold text-white/90 uppercase tracking-widest drop-shadow-lg">
               {title}
             </p>
-            <p className={cn(
-              "text-4xl font-bold tracking-tight transition-all duration-500",
+
+            {/* Value with enhanced styling */}
+            <div className={cn(
+              "text-5xl font-black tracking-tight transition-all duration-500",
+              "text-white drop-shadow-2xl",
               isAnimating && "animate-pulse",
-              isHovered && "text-primary scale-105"
+              isHovered && "scale-110"
             )}>
               {displayValue}
-            </p>
+            </div>
+
+            {/* Trend indicator */}
             {trend && (
               <div className={cn(
-                "flex items-center gap-2 text-sm font-semibold transition-all duration-300",
-                trend.isPositive ? "text-green-500" : "text-red-500",
-                isHovered && "scale-110"
+                "inline-flex items-center gap-2 px-3 py-1.5 rounded-full",
+                "backdrop-blur-sm transition-all duration-500",
+                trend.isPositive 
+                  ? "bg-green-500/30 text-green-100" 
+                  : "bg-red-500/30 text-red-100",
+                isHovered && "scale-110 shadow-lg"
               )}>
                 {trend.isPositive ? (
                   <TrendingUp className="h-4 w-4 animate-bounce" />
                 ) : (
                   <TrendingDown className="h-4 w-4 animate-bounce" />
                 )}
-                <span>{Math.abs(trend.value)}%</span>
-                <span className="text-xs text-muted-foreground ml-1">vs last month</span>
+                <span className="font-bold text-sm">{Math.abs(trend.value)}%</span>
+                <span className="text-xs opacity-80">vs last month</span>
               </div>
             )}
           </div>
 
-          {/* Icon with enhanced animations */}
+          {/* Icon container with advanced effects */}
           <div className="relative">
-            {/* Glow effect */}
+            {/* Outer glow ring */}
             <div className={cn(
-              "absolute inset-0 rounded-2xl bg-gradient-to-br blur-2xl opacity-0 group-hover:opacity-50 transition-all duration-500",
-              selectedGradient
+              "absolute -inset-4 rounded-3xl blur-2xl opacity-0 transition-all duration-700",
+              "group-hover:opacity-60 bg-white/30"
             )} />
 
+            {/* Pulsing ring */}
             <div className={cn(
-              "relative h-20 w-20 rounded-2xl bg-gradient-to-br flex items-center justify-center shadow-2xl",
-              "transform transition-all duration-500",
+              "absolute -inset-2 rounded-2xl border-2 border-white/40",
+              "opacity-0 group-hover:opacity-100 animate-ping"
+            )} />
+
+            {/* Icon background */}
+            <div className={cn(
+              "relative h-24 w-24 rounded-3xl flex items-center justify-center",
+              "bg-white/20 backdrop-blur-xl shadow-2xl",
+              "border border-white/30",
+              "transform transition-all duration-700",
               "group-hover:scale-110 group-hover:rotate-12",
-              selectedGradient
+              "group-hover:bg-white/30"
             )}>
               <Icon className={cn(
-                "h-10 w-10 text-white drop-shadow-lg transition-transform duration-500",
-                isHovered && "scale-110 rotate-12"
-              )} />
-
-              {/* Pulse ring effect */}
-              <div className={cn(
-                "absolute inset-0 rounded-2xl border-2 border-white/30",
-                "animate-ping opacity-0 group-hover:opacity-100"
+                "h-12 w-12 text-white drop-shadow-2xl",
+                "transition-all duration-700",
+                isHovered && "scale-125 rotate-12"
               )} />
             </div>
           </div>
         </div>
 
-        {/* Floating particles effect */}
+        {/* Floating particles */}
         {isHovered && (
-          <>
-            <div className="absolute top-4 right-4 w-2 h-2 bg-primary/40 rounded-full animate-ping" />
-            <div className="absolute bottom-6 left-8 w-1.5 h-1.5 bg-primary/30 rounded-full animate-ping animation-delay-200" />
-            <div className="absolute top-1/2 left-4 w-1 h-1 bg-primary/20 rounded-full animate-ping animation-delay-400" />
-          </>
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-8 right-12 w-3 h-3 bg-white/60 rounded-full animate-ping" />
+            <div className="absolute bottom-12 left-10 w-2 h-2 bg-white/40 rounded-full animate-ping animation-delay-200" />
+            <div className="absolute top-20 left-6 w-2 h-2 bg-white/50 rounded-full animate-ping animation-delay-400" />
+            <div className="absolute bottom-8 right-8 w-1.5 h-1.5 bg-white/30 rounded-full animate-ping animation-delay-600" />
+          </div>
         )}
+
+        {/* Bottom gradient line */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent" />
       </CardContent>
     </Card>
   );
