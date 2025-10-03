@@ -188,34 +188,25 @@ export default function Dashboard() {
         </p>
       </div>
 
-      {/* Carousel for Stat Cards */}
-      <div className="relative px-2">
-        <Carousel
-          opts={{
-            align: "start",
-            loop: false,
-          }}
-          className="w-full"
-        >
-          <CarouselContent className="-ml-2 md:-ml-3 lg:-ml-4">
-            {statCards.map((card, index) => (
-              <CarouselItem 
-                key={index}
-                className="pl-2 md:pl-3 lg:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
-              >
-                <div className="h-full">
-                  <StatCard
-                    title={card.title}
-                    value={card.value}
-                    icon={card.icon}
-                    trend={card.trend}
-                    gradient={card.gradient}
-                  />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+      {/* Responsive Grid for Stat Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        {statCards.map((card, index) => (
+          <div 
+            key={index}
+            className="w-full"
+            style={{
+              animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
+            }}
+          >
+            <StatCard
+              title={card.title}
+              value={card.value}
+              icon={card.icon}
+              trend={card.trend}
+              gradient={card.gradient}
+            />
+          </div>
+        ))}
       </div>
 
       {/* Recent Activity Section */}
