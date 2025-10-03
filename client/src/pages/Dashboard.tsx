@@ -189,14 +189,13 @@ export default function Dashboard() {
       </div>
 
       {/* Swipeable Carousel for all screen sizes */}
-      <div className="relative w-full overflow-hidden px-12">
+      <div className="relative w-full overflow-hidden">
         <Carousel
           opts={{
             align: "start",
             loop: false,
-            slidesToScroll: 4,
+            slidesToScroll: 1,
             containScroll: "trimSnaps",
-            dragFree: false,
           }}
           className="w-full"
         >
@@ -219,8 +218,6 @@ export default function Dashboard() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden lg:flex" />
-          <CarouselNext className="hidden lg:flex" />
         </Carousel>
       </div>
 
