@@ -1,7 +1,15 @@
+
 import { StatCard } from "@/components/StatCard";
 import { UserTable } from "@/components/UserTable";
 import { BBPSTable } from "@/components/BBPSTable";
 import { Users, Zap, DollarSign, TrendingUp, Crown, Smartphone, Receipt, CheckCircle, Clock } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const sampleUsers = [
   {
@@ -104,6 +112,72 @@ const sampleServices = [
   },
 ];
 
+const statCards = [
+  {
+    title: "Total Transactions",
+    value: "45,892",
+    icon: DollarSign,
+    trend: { value: 12.5, isPositive: true },
+    gradient: "from-blue-500 to-cyan-500",
+  },
+  {
+    title: "Total Revenue",
+    value: "₹89,45,231",
+    icon: TrendingUp,
+    trend: { value: 15.3, isPositive: true },
+    gradient: "from-green-500 to-emerald-500",
+  },
+  {
+    title: "Total Users",
+    value: "15,847",
+    icon: Users,
+    trend: { value: 8.2, isPositive: true },
+    gradient: "from-purple-500 to-pink-500",
+  },
+  {
+    title: "Prime Users",
+    value: "3,421",
+    icon: Crown,
+    trend: { value: 18.7, isPositive: true },
+    gradient: "from-yellow-500 to-orange-500",
+  },
+  {
+    title: "Total Recharges",
+    value: "28,456",
+    icon: Smartphone,
+    trend: { value: 10.4, isPositive: true },
+    gradient: "from-indigo-500 to-blue-500",
+  },
+  {
+    title: "BBPS Payments",
+    value: "12,234",
+    icon: Receipt,
+    trend: { value: 14.8, isPositive: true },
+    gradient: "from-pink-500 to-rose-500",
+  },
+  {
+    title: "Success Rate",
+    value: "98.7%",
+    icon: CheckCircle,
+    trend: { value: 2.1, isPositive: true },
+    gradient: "from-emerald-500 to-teal-500",
+  },
+  {
+    title: "Pending Payments",
+    value: "234",
+    icon: Clock,
+    trend: { value: 5.3, isPositive: false },
+    gradient: "from-orange-500 to-amber-500",
+  },
+  {
+    title: "Today's Revenue",
+    value: "₹2,45,890",
+    icon: Zap,
+    trend: { value: 22.4, isPositive: true },
+    gradient: "from-violet-500 to-purple-500",
+  },
+];
+
 export default function Dashboard() {
   return (
     <div className="p-6 space-y-6 animate-fade-in">
@@ -114,75 +188,44 @@ export default function Dashboard() {
         </p>
       </div>
 
-      {/* Statistics Cards Grid - 9 Cards like requested */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <StatCard
-          title="Total Transactions"
-          value="45,892"
-          icon={DollarSign}
-          trend={{ value: 12.5, isPositive: true }}
-          gradient="from-blue-500 to-cyan-500"
-        />
-        <StatCard
-          title="Total Revenue"
-          value="₹89,45,231"
-          icon={TrendingUp}
-          trend={{ value: 15.3, isPositive: true }}
-          gradient="from-green-500 to-emerald-500"
-        />
-        <StatCard
-          title="Total Users"
-          value="15,847"
-          icon={Users}
-          trend={{ value: 8.2, isPositive: true }}
-          gradient="from-purple-500 to-pink-500"
-        />
-        <StatCard
-          title="Prime Users"
-          value="3,421"
-          icon={Crown}
-          trend={{ value: 18.7, isPositive: true }}
-          gradient="from-yellow-500 to-orange-500"
-        />
-        <StatCard
-          title="Total Recharges"
-          value="28,456"
-          icon={Smartphone}
-          trend={{ value: 10.4, isPositive: true }}
-          gradient="from-indigo-500 to-blue-500"
-        />
-        <StatCard
-          title="BBPS Payments"
-          value="12,234"
-          icon={Receipt}
-          trend={{ value: 14.8, isPositive: true }}
-          gradient="from-pink-500 to-rose-500"
-        />
-        <StatCard
-          title="Success Rate"
-          value="98.7%"
-          icon={CheckCircle}
-          trend={{ value: 2.1, isPositive: true }}
-          gradient="from-emerald-500 to-teal-500"
-        />
-        <StatCard
-          title="Pending Payments"
-          value="234"
-          icon={Clock}
-          trend={{ value: 5.3, isPositive: false }}
-          gradient="from-orange-500 to-amber-500"
-        />
-        <StatCard
-          title="Today's Revenue"
-          value="₹2,45,890"
-          icon={Zap}
-          trend={{ value: 22.4, isPositive: true }}
-          gradient="from-violet-500 to-purple-500"
-        />
+      {/* Professional Card Carousel - 4 cards visible on desktop */}
+      <div className="relative px-12">
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+            slidesToScroll: 1,
+          }}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-2 md:-ml-4">
+            {statCards.map((card, index) => (
+              <CarouselItem 
+                key={index} 
+                className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                style={{
+                  animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
+                }}
+              >
+                <div className="h-full transform transition-all duration-500 hover:scale-105">
+                  <StatCard
+                    title={card.title}
+                    value={card.value}
+                    icon={card.icon}
+                    trend={card.trend}
+                    gradient={card.gradient}
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden lg:flex -left-6 bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 hover:from-blue-600 hover:to-purple-600 shadow-2xl transform transition-all duration-300 hover:scale-110" />
+          <CarouselNext className="hidden lg:flex -right-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 hover:from-purple-600 hover:to-pink-600 shadow-2xl transform transition-all duration-300 hover:scale-110" />
+        </Carousel>
       </div>
 
       {/* Recent Activity Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
         <UserTable users={sampleUsers} />
         <BBPSTable transactions={sampleServices} />
       </div>
