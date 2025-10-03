@@ -12,7 +12,7 @@ interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
-export function DashboardLayout({ children }: DashboardLayoutProps) {
+export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const style = {
     "--sidebar-width": "16rem",
     "--sidebar-width-icon": "4rem",
