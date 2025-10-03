@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, CreditCard } from "lucide-react";
 import { useState } from "react";
 
 type StatusFilter = "All" | "Success" | "Pending" | "Failed";
@@ -64,8 +64,18 @@ export function BBPSTable({ services }: BBPSTableProps) {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex gap-2">
+    <div className="space-y-4 animate-slide-in-right" style={{ animationDelay: "0.1s" }}>
+      <div className="flex items-center justify-between">
+        <h3 className="text-xl font-semibold flex items-center gap-2">
+          <CreditCard className="h-5 w-5 text-purple-500" />
+          BBPS Transactions
+        </h3>
+        <Badge variant="secondary" className="text-xs">
+          {filteredServices.length} {filteredServices.length === 1 ? "Transaction" : "Transactions"}
+        </Badge>
+      </div>
+      
+      <div className="flex gap-2 flex-wrap">
         {(["All", "Success", "Pending", "Failed"] as StatusFilter[]).map((type) => (
           <Button
             key={type}
@@ -73,14 +83,14 @@ export function BBPSTable({ services }: BBPSTableProps) {
             size="sm"
             onClick={() => setFilter(type)}
             data-testid={`button-filter-${type.toLowerCase()}`}
-            className="hover-elevate"
+            className="hover-elevate transition-all duration-300"
           >
             {type}
           </Button>
         ))}
       </div>
 
-      <div className="rounded-lg border border-border overflow-hidden">
+      <div className="rounded-xl border border-border/50 overflow-hidden shadow-xl bg-card/50 backdrop-blur-sm">
         <Table>
           <TableHeader>
             <TableRow className="bg-card hover:bg-card">

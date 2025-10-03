@@ -1,4 +1,4 @@
-import { Download, Smartphone, CreditCard, Wrench, Settings, ChevronDown, Users } from "lucide-react";
+import { Download, Smartphone, CreditCard, Wrench, Settings, ChevronDown, Users, CreditCard as CreditCardIcon } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,

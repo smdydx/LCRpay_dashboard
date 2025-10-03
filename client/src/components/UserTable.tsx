@@ -56,7 +56,17 @@ export function UserTable({ users }: UserTableProps) {
   });
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 animate-slide-in-right">
+      <div className="flex items-center justify-between">
+        <h3 className="text-xl font-semibold flex items-center gap-2">
+          <Users className="h-5 w-5 text-blue-500" />
+          User Management
+        </h3>
+        <Badge variant="secondary" className="text-xs">
+          {filteredUsers.length} {filteredUsers.length === 1 ? "User" : "Users"}
+        </Badge>
+      </div>
+      
       <div className="flex gap-2">
         {(["All", "Prime", "Normal"] as UserType[]).map((type) => (
           <Button
@@ -65,14 +75,14 @@ export function UserTable({ users }: UserTableProps) {
             size="sm"
             onClick={() => setFilter(type)}
             data-testid={`button-filter-${type.toLowerCase()}`}
-            className="hover-elevate"
+            className="hover-elevate transition-all duration-300"
           >
             {type}
           </Button>
         ))}
       </div>
 
-      <div className="rounded-lg border border-border overflow-hidden">
+      <div className="rounded-xl border border-border/50 overflow-hidden shadow-xl bg-card/50 backdrop-blur-sm">
         <Table>
           <TableHeader>
             <TableRow className="bg-card hover:bg-card">

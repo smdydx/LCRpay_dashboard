@@ -3,12 +3,113 @@ import { UserTable } from "@/components/UserTable";
 import { BBPSTable } from "@/components/BBPSTable";
 import { Users, CreditCard, TrendingUp, DollarSign } from "lucide-react";
 
+const sampleUsers = [
+  {
+    id: "1",
+    name: "Rahul Kumar",
+    email: "rahul.kumar@example.com",
+    phone: "+91 98765 43210",
+    userType: "Prime" as const,
+    status: "Active" as const,
+    downloadCount: 145,
+    rechargeAmount: 25000,
+  },
+  {
+    id: "2",
+    name: "Priya Sharma",
+    email: "priya.sharma@example.com",
+    phone: "+91 98765 43211",
+    userType: "Normal" as const,
+    status: "Active" as const,
+    downloadCount: 87,
+    rechargeAmount: 12500,
+  },
+  {
+    id: "3",
+    name: "Amit Patel",
+    email: "amit.patel@example.com",
+    phone: "+91 98765 43212",
+    userType: "Prime" as const,
+    status: "Inactive" as const,
+    downloadCount: 203,
+    rechargeAmount: 45000,
+  },
+  {
+    id: "4",
+    name: "Sneha Reddy",
+    email: "sneha.reddy@example.com",
+    phone: "+91 98765 43213",
+    userType: "Normal" as const,
+    status: "Active" as const,
+    downloadCount: 56,
+    rechargeAmount: 8900,
+  },
+  {
+    id: "5",
+    name: "Vikram Singh",
+    email: "vikram.singh@example.com",
+    phone: "+91 98765 43214",
+    userType: "Prime" as const,
+    status: "Active" as const,
+    downloadCount: 312,
+    rechargeAmount: 67000,
+  },
+];
+
+const sampleServices = [
+  {
+    id: "1",
+    serviceName: "Electricity Bill",
+    category: "Utilities",
+    provider: "BSES Rajdhani",
+    amount: 2500,
+    status: "Success" as const,
+    transactionDate: "2024-01-15",
+  },
+  {
+    id: "2",
+    serviceName: "Water Bill",
+    category: "Utilities",
+    provider: "Delhi Jal Board",
+    amount: 850,
+    status: "Success" as const,
+    transactionDate: "2024-01-14",
+  },
+  {
+    id: "3",
+    serviceName: "Gas Bill",
+    category: "Utilities",
+    provider: "Indraprastha Gas",
+    amount: 1200,
+    status: "Pending" as const,
+    transactionDate: "2024-01-13",
+  },
+  {
+    id: "4",
+    serviceName: "Mobile Postpaid",
+    category: "Telecom",
+    provider: "Airtel",
+    amount: 599,
+    status: "Success" as const,
+    transactionDate: "2024-01-12",
+  },
+  {
+    id: "5",
+    serviceName: "DTH Recharge",
+    category: "Entertainment",
+    provider: "Tata Sky",
+    amount: 450,
+    status: "Failed" as const,
+    transactionDate: "2024-01-11",
+  },
+];
+
 export default function Dashboard() {
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 animate-fade-in">
       <div className="mb-8">
-        <h2 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">Dashboard</h2>
-        <p className="text-muted-foreground mt-2">
+        <h2 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent animate-slide-in-up">Dashboard</h2>
+        <p className="text-muted-foreground mt-2 animate-slide-in-up" style={{ animationDelay: "0.1s" }}>
           Welcome back! Here's what's happening today.
         </p>
       </div>
@@ -45,8 +146,8 @@ export default function Dashboard() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <UserTable />
-        <BBPSTable />
+        <UserTable users={sampleUsers} />
+        <BBPSTable services={sampleServices} />
       </div>
     </div>
   );
