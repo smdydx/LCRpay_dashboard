@@ -195,15 +195,15 @@ export default function Dashboard() {
             align: "start",
             loop: false,
           }}
-          className="w-full max-w-[1400px] mx-auto"
+          className="w-full"
         >
-          <CarouselContent className="-ml-3 md:-ml-4">
+          <CarouselContent className="-ml-2 md:-ml-3 lg:-ml-4">
             {statCards.map((card, index) => (
               <CarouselItem 
                 key={index}
-                className="pl-3 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/4"
+                className="pl-2 md:pl-3 lg:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
               >
-                <div className="h-full max-w-[320px]">
+                <div className="h-full">
                   <StatCard
                     title={card.title}
                     value={card.value}
