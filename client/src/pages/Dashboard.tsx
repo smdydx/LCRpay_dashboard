@@ -189,21 +189,21 @@ export default function Dashboard() {
       </div>
 
       {/* Swipeable Carousel for all screen sizes */}
-      <div className="relative">
+      <div className="relative w-full overflow-hidden">
         <Carousel
           opts={{
             align: "start",
             loop: false,
             slidesToScroll: 1,
-            dragFree: true,
+            containScroll: "trimSnaps",
           }}
           className="w-full"
         >
-          <CarouselContent className="-ml-3 lg:-ml-6">
+          <CarouselContent className="ml-0 gap-3 lg:gap-6">
             {statCards.map((card, index) => (
               <CarouselItem 
                 key={index} 
-                className="pl-3 lg:pl-6 basis-[280px] sm:basis-1/2 lg:basis-1/4"
+                className="basis-[280px] sm:basis-1/2 lg:basis-1/4 pl-0"
                 style={{
                   animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
                 }}
