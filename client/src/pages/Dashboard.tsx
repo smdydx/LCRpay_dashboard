@@ -188,53 +188,30 @@ export default function Dashboard() {
         </p>
       </div>
 
-      {/* First 4 Cards - Fixed Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-        {statCards.slice(0, 4).map((card, index) => (
-          <div 
-            key={index}
-            className="w-full"
-            style={{
-              animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
-            }}
-          >
-            <StatCard
-              title={card.title}
-              value={card.value}
-              icon={card.icon}
-              trend={card.trend}
-              gradient={card.gradient}
-            />
-          </div>
-        ))}
-      </div>
-
-      {/* Remaining Cards - Horizontal Scroll */}
-      {statCards.length > 4 && (
-        <div className="relative -mx-4 px-4 md:mx-0 md:px-0">
-          <div className="overflow-x-auto scrollbar-hide pb-2">
-            <div className="flex gap-4 md:gap-6" style={{ minWidth: 'min-content' }}>
-              {statCards.slice(4).map((card, index) => (
-                <div 
-                  key={index + 4}
-                  className="flex-shrink-0 w-[280px] sm:w-[320px]"
-                  style={{
-                    animation: `slideInFromBottom 0.6s ease-out ${(index + 4) * 0.1}s both`,
-                  }}
-                >
-                  <StatCard
-                    title={card.title}
-                    value={card.value}
-                    icon={card.icon}
-                    trend={card.trend}
-                    gradient={card.gradient}
-                  />
-                </div>
-              ))}
-            </div>
+      {/* All Cards - Horizontal Scroll */}
+      <div className="relative -mx-4 px-4 md:mx-0 md:px-0">
+        <div className="overflow-x-auto scrollbar-hide pb-2">
+          <div className="flex gap-4 md:gap-6 lg:gap-8" style={{ minWidth: 'min-content' }}>
+            {statCards.map((card, index) => (
+              <div 
+                key={index}
+                className="flex-shrink-0 w-[280px] sm:w-[320px] lg:w-[calc(25%-1.5rem)]"
+                style={{
+                  animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
+                }}
+              >
+                <StatCard
+                  title={card.title}
+                  value={card.value}
+                  icon={card.icon}
+                  trend={card.trend}
+                  gradient={card.gradient}
+                />
+              </div>
+            ))}
           </div>
         </div>
-      )}
+      </div>
 
       {/* Recent Activity Section */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 md:gap-6 mt-6 md:mt-8">
