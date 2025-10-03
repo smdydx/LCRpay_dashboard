@@ -188,8 +188,8 @@ export default function Dashboard() {
         </p>
       </div>
 
-      {/* Swipeable Carousel for all screen sizes */}
-      <div className="relative w-full overflow-hidden">
+      {/* Swipeable Carousel - Fully Responsive */}
+      <div className="relative w-full">
         <Carousel
           opts={{
             align: "start",
@@ -199,11 +199,11 @@ export default function Dashboard() {
           }}
           className="w-full"
         >
-          <CarouselContent className="ml-0 gap-4 lg:gap-6">
+          <CarouselContent className="-ml-2 md:-ml-4">
             {statCards.map((card, index) => (
               <CarouselItem 
                 key={index} 
-                className="basis-[280px] sm:basis-1/2 lg:basis-[calc(25%-18px)] pl-0"
+                className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/4"
                 style={{
                   animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
                 }}
