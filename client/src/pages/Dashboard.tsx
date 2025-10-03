@@ -182,9 +182,9 @@ export default function Dashboard() {
       </div>
 
       {/* Recent Activity Section */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <UserTable users={sampleUsers} />
-        <BBPSTable services={sampleServices} />
+        <BBPSTable transactions={sampleServices} />
       </div>
     </div>
   );

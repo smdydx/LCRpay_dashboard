@@ -4,6 +4,9 @@ import { BarChart3, Bell, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { Separator } from "@/components/ui/separator"; // Import Separator
+import { LogOut } from "lucide-react"; // Import LogOut icon
+import { useLocation } from "wouter"; // Import useLocation for navigation
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -13,6 +16,13 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const style = {
     "--sidebar-width": "16rem",
     "--sidebar-width-icon": "4rem",
+  };
+
+  const [, setLocation] = useLocation(); // Initialize useLocation
+
+  const handleLogout = () => { // Define handleLogout function
+    localStorage.removeItem("isAuthenticated"); // Remove authentication token
+    setLocation("/login"); // Navigate to login page
   };
 
   return (
@@ -38,15 +48,25 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             <div className="flex items-center gap-3 animate-slide-in-right" style={{ animationDelay: "0.1s" }}>
               <div className="relative hidden md:block">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input 
-                  placeholder="Search anything..." 
-                  className="pl-10 w-72 border-border/50 bg-background/50 backdrop-blur-sm focus:ring-2 focus:ring-primary/20 transition-all duration-300" 
+                <Input
+                  placeholder="Search anything..."
+                  className="pl-10 w-72 border-border/50 bg-background/50 backdrop-blur-sm focus:ring-2 focus:ring-primary/20 transition-all duration-300"
                 />
               </div>
               <Button variant="outline" size="icon" className="rounded-full hover-elevate border-border/50 bg-background/50 backdrop-blur-sm hover:bg-primary/10 transition-all duration-300">
                 <Bell className="h-5 w-5" />
               </Button>
               <ThemeToggle />
+              <Separator orientation="vertical" className="h-6" /> {/* Add separator */}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleLogout} // Attach handleLogout to onClick event
+                className="gap-2"
+              >
+                <LogOut className="h-4 w-4" /> {/* Add Logout icon */}
+                Logout
+              </Button>
             </div>
           </header>
           <main className="flex-1 overflow-auto bg-gradient-to-br from-background via-background to-blue-500/5">
