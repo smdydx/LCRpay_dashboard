@@ -191,11 +191,11 @@ export default function Dashboard() {
       {/* All Cards - Horizontal Scroll */}
       <div className="relative -mx-4 px-4 md:mx-0 md:px-0">
         <div className="overflow-x-auto scrollbar-hide pb-2">
-          <div className="flex gap-4 md:gap-6 lg:gap-8" style={{ minWidth: 'min-content' }}>
+          <div className="flex gap-4 md:gap-5 lg:gap-6" style={{ minWidth: 'min-content' }}>
             {statCards.map((card, index) => (
               <div 
                 key={index}
-                className="flex-shrink-0 w-[280px] sm:w-[320px] lg:w-[calc(25%-1.5rem)]"
+                className="flex-shrink-0 w-[280px] sm:w-[300px] md:w-[320px] lg:w-[calc((100%-4.5rem)/4)]"
                 style={{
                   animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
                 }}
