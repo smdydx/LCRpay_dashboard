@@ -29,12 +29,12 @@ interface UserTableProps {
   users: User[];
 }
 
-export function UserTable({ users }: UserTableProps) {
-  const [filterType, setFilterType] = useState<UserType>("All");
+export function UserTable({ users = [] }: UserTableProps) {
+  const [userType, setUserType] = useState<UserType>("All");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
   const filteredUsers = users.filter(user => 
-    filterType === "All" ? true : user.userType === filterType
+    userType === "All" ? true : user.userType === userType
   );
 
   const sortedUsers = [...filteredUsers].sort((a, b) => {
@@ -56,25 +56,25 @@ export function UserTable({ users }: UserTableProps) {
           </div>
           <div className="flex gap-2">
             <Button
-              variant={filterType === "All" ? "default" : "outline"}
+              variant={userType === "All" ? "default" : "outline"}
               size="sm"
-              onClick={() => setFilterType("All")}
+              onClick={() => setUserType("All")}
               className="hover-elevate"
             >
               All
             </Button>
             <Button
-              variant={filterType === "Prime" ? "default" : "outline"}
+              variant={userType === "Prime" ? "default" : "outline"}
               size="sm"
-              onClick={() => setFilterType("Prime")}
+              onClick={() => setUserType("Prime")}
               className="hover-elevate"
             >
               Prime
             </Button>
             <Button
-              variant={filterType === "Normal" ? "default" : "outline"}
+              variant={userType === "Normal" ? "default" : "outline"}
               size="sm"
-              onClick={() => setFilterType("Normal")}
+              onClick={() => setUserType("Normal")}
               className="hover-elevate"
             >
               Normal

@@ -28,12 +28,12 @@ interface BBPSTableProps {
   services: BBPSService[];
 }
 
-export function BBPSTable({ services }: BBPSTableProps) {
+export function BBPSTable({ services = [] }: BBPSTableProps) {
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("All");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
-  const [filterStatus, setFilterStatus] = useState<StatusFilter>("All");
 
   const filteredServices = services.filter(service =>
-    filterStatus === "All" ? true : service.status === filterStatus
+    statusFilter === "All" ? true : service.status === statusFilter
   );
 
   const sortedServices = [...filteredServices].sort((a, b) => {
@@ -55,25 +55,25 @@ export function BBPSTable({ services }: BBPSTableProps) {
           </div>
           <div className="flex gap-2">
             <Button
-              variant={filterStatus === "All" ? "default" : "outline"}
+              variant={statusFilter === "All" ? "default" : "outline"}
               size="sm"
-              onClick={() => setFilterStatus("All")}
+              onClick={() => setStatusFilter("All")}
               className="hover-elevate"
             >
               All
             </Button>
             <Button
-              variant={filterStatus === "Success" ? "default" : "outline"}
+              variant={statusFilter === "Success" ? "default" : "outline"}
               size="sm"
-              onClick={() => setFilterStatus("Success")}
+              onClick={() => setStatusFilter("Success")}
               className="hover-elevate"
             >
               Success
             </Button>
             <Button
-              variant={filterStatus === "Pending" ? "default" : "outline"}
+              variant={statusFilter === "Pending" ? "default" : "outline"}
               size="sm"
-              onClick={() => setFilterStatus("Pending")}
+              onClick={() => setStatusFilter("Pending")}
               className="hover-elevate"
             >
               Pending
