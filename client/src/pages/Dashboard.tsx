@@ -190,26 +190,26 @@ export default function Dashboard() {
 
       {/* Professional Card Grid - 4 cards visible on desktop, carousel on mobile */}
       <div className="relative">
-        {/* Mobile/Tablet Carousel (< 1024px) */}
-        <div className="block lg:hidden px-12">
+        {/* Mobile/Tablet Carousel (< 1024px) - Cards swipe, not screen */}
+        <div className="block lg:hidden">
           <Carousel
             opts={{
               align: "start",
-              loop: true,
+              loop: false,
               slidesToScroll: 1,
             }}
-            className="w-full"
+            className="w-full max-w-full"
           >
-            <CarouselContent className="-ml-2 md:-ml-4">
+            <CarouselContent className="-ml-4">
               {statCards.map((card, index) => (
                 <CarouselItem 
                   key={index} 
-                  className="pl-2 md:pl-4 basis-full sm:basis-1/2"
+                  className="pl-4 basis-[85%] sm:basis-[45%]"
                   style={{
                     animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
                   }}
                 >
-                  <div className="h-full transform transition-all duration-500 hover:scale-105">
+                  <div className="h-full">
                     <StatCard
                       title={card.title}
                       value={card.value}
@@ -221,17 +221,15 @@ export default function Dashboard() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="-left-6 bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 hover:from-blue-600 hover:to-purple-600 shadow-2xl transform transition-all duration-300 hover:scale-110" />
-            <CarouselNext className="-right-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 hover:from-purple-600 hover:to-pink-600 shadow-2xl transform transition-all duration-300 hover:scale-110" />
           </Carousel>
         </div>
 
-        {/* Desktop Grid (>= 1024px) - 4 cards per row, no carousel, fixed width */}
-        <div className="hidden lg:grid lg:grid-cols-4 gap-4 max-w-full overflow-hidden">
+        {/* Desktop Grid (>= 1024px) - 4 cards per row with gap */}
+        <div className="hidden lg:grid lg:grid-cols-4 gap-6">
           {statCards.slice(0, 4).map((card, index) => (
             <div 
               key={index}
-              className="transform transition-all duration-500 hover:scale-105 w-full"
+              className="transform transition-all duration-500 hover:scale-105"
               style={{
                 animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
               }}
