@@ -189,21 +189,21 @@ export default function Dashboard() {
       </div>
 
       {/* Carousel for Stat Cards */}
-      <div className="relative">
+      <div className="relative px-2">
         <Carousel
           opts={{
             align: "start",
             loop: false,
           }}
-          className="w-full"
+          className="w-full max-w-[1400px] mx-auto"
         >
-          <CarouselContent className="-ml-2 md:-ml-4">
+          <CarouselContent className="-ml-3 md:-ml-4">
             {statCards.map((card, index) => (
               <CarouselItem 
                 key={index}
-                className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/4"
+                className="pl-3 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/4"
               >
-                <div className="h-full">
+                <div className="h-full max-w-[320px]">
                   <StatCard
                     title={card.title}
                     value={card.value}
