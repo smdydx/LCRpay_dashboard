@@ -3,6 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { DashboardLayout } from "@/components/DashboardLayout";
 import Dashboard from "@/pages/Dashboard";
 import DownloadUser from "@/pages/DownloadUser";
@@ -31,12 +32,14 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <DashboardLayout>
-          <Router />
-        </DashboardLayout>
-        <Toaster />
-      </TooltipProvider>
+      <ThemeProvider defaultTheme="light" storageKey="lcr-pay-theme">
+        <TooltipProvider>
+          <DashboardLayout>
+            <Router />
+          </DashboardLayout>
+          <Toaster />
+        </TooltipProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

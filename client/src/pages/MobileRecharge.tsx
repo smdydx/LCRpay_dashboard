@@ -4,16 +4,132 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Smartphone, Users, CreditCard, TrendingUp, DollarSign, Zap, Clock, CheckCircle, XCircle } from "lucide-react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Smartphone, Users, CreditCard, TrendingUp, DollarSign, Zap, Clock, CheckCircle, XCircle, ArrowUpDown, User, Phone, Calendar } from "lucide-react";
 import { StatCard } from "@/components/StatCard";
+import { useState } from "react";
+
+// Sample transaction data with complete details
+const transactions = [
+  {
+    id: "TXN001",
+    userName: "Rajesh Kumar",
+    userType: "Prime" as const,
+    mobile: "+91 98765 43210",
+    operator: "Airtel",
+    plan: "₹299 - Unlimited",
+    amount: 299,
+    status: "Success" as const,
+    date: "2024-01-15 10:30 AM",
+    transactionId: "AIR2024011512345"
+  },
+  {
+    id: "TXN002",
+    userName: "Priya Sharma",
+    userType: "Normal" as const,
+    mobile: "+91 98765 43211",
+    operator: "Jio",
+    plan: "₹199 - 1.5GB/day",
+    amount: 199,
+    status: "Success" as const,
+    date: "2024-01-15 09:45 AM",
+    transactionId: "JIO2024011509876"
+  },
+  {
+    id: "TXN003",
+    userName: "Amit Patel",
+    userType: "Prime" as const,
+    mobile: "+91 98765 43212",
+    operator: "Vi",
+    plan: "₹499 - Unlimited",
+    amount: 499,
+    status: "Success" as const,
+    date: "2024-01-15 09:15 AM",
+    transactionId: "VI2024011554321"
+  },
+  {
+    id: "TXN004",
+    userName: "Sneha Reddy",
+    userType: "Normal" as const,
+    mobile: "+91 98765 43213",
+    operator: "BSNL",
+    plan: "₹399 - 2GB/day",
+    amount: 399,
+    status: "Pending" as const,
+    date: "2024-01-15 08:30 AM",
+    transactionId: "BSN2024011598765"
+  },
+  {
+    id: "TXN005",
+    userName: "Vikram Singh",
+    userType: "Prime" as const,
+    mobile: "+91 98765 43214",
+    operator: "Airtel",
+    plan: "₹599 - Unlimited Pro",
+    amount: 599,
+    status: "Success" as const,
+    date: "2024-01-15 08:00 AM",
+    transactionId: "AIR2024011565432"
+  },
+  {
+    id: "TXN006",
+    userName: "Ananya Desai",
+    userType: "Normal" as const,
+    mobile: "+91 98765 43215",
+    operator: "Jio",
+    plan: "₹155 - Basic",
+    amount: 155,
+    status: "Failed" as const,
+    date: "2024-01-14 06:20 PM",
+    transactionId: "JIO2024011487654"
+  },
+  {
+    id: "TXN007",
+    userName: "Karthik Iyer",
+    userType: "Prime" as const,
+    mobile: "+91 98765 43216",
+    operator: "Vi",
+    plan: "₹666 - Premium",
+    amount: 666,
+    status: "Success" as const,
+    date: "2024-01-14 05:45 PM",
+    transactionId: "VI2024011476543"
+  },
+  {
+    id: "TXN008",
+    userName: "Neha Gupta",
+    userType: "Normal" as const,
+    mobile: "+91 98765 43217",
+    operator: "BSNL",
+    plan: "₹249 - Standard",
+    amount: 249,
+    status: "Success" as const,
+    date: "2024-01-14 04:30 PM",
+    transactionId: "BSN2024011465432"
+  }
+];
+
+type StatusFilter = "All" | "Success" | "Pending" | "Failed";
 
 export default function MobileRecharge() {
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("All");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+
+  const filteredTransactions = transactions.filter(txn =>
+    statusFilter === "All" ? true : txn.status === statusFilter
+  );
+
+  const sortedTransactions = [...filteredTransactions].sort((a, b) => {
+    return sortOrder === "asc" ? a.amount - b.amount : b.amount - a.amount;
+  });
+
   return (
     <div className="p-6 space-y-6 animate-fade-in">
       <div className="mb-8">
         <h2 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent animate-slide-in-up">Mobile Recharge</h2>
         <p className="text-muted-foreground mt-2 animate-slide-in-up" style={{ animationDelay: "0.1s" }}>
-          Quick and easy mobile recharge for all operators with detailed analytics
+          Quick and easy mobile recharge for all operators with detailed transaction history
         </p>
       </div>
 
@@ -151,50 +267,129 @@ export default function MobileRecharge() {
         </Card>
       </div>
 
-      {/* Recent Transactions */}
-      <div className="max-w-4xl">
-        <Card className="border-border/50 shadow-xl bg-card/50 backdrop-blur-sm">
-          <CardHeader>
-            <CardTitle className="text-xl">Recent Transactions</CardTitle>
-            <CardDescription>Latest mobile recharge transactions</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {[
-                { number: "+91 98765 43210", operator: "Airtel", amount: "₹299", status: "Success", time: "2 mins ago" },
-                { number: "+91 98765 43211", operator: "Jio", amount: "₹199", status: "Success", time: "15 mins ago" },
-                { number: "+91 98765 43212", operator: "Vi", amount: "₹499", status: "Success", time: "1 hour ago" },
-                { number: "+91 98765 43213", operator: "BSNL", amount: "₹399", status: "Pending", time: "2 hours ago" },
-              ].map((transaction, index) => (
-                <div key={index} className="flex items-center justify-between p-4 rounded-lg border border-border/50 hover:bg-accent/50 transition-all duration-300 hover-elevate">
-                  <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
-                      <Smartphone className="h-6 w-6 text-white" />
-                    </div>
-                    <div>
-                      <p className="font-semibold">{transaction.number}</p>
-                      <p className="text-sm text-muted-foreground">{transaction.operator}</p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-bold text-lg">{transaction.amount}</p>
-                    <div className="flex items-center gap-2 justify-end">
-                      <span className={`text-xs px-2 py-1 rounded-full ${
-                        transaction.status === "Success" 
-                          ? "bg-green-500/20 text-green-500" 
-                          : "bg-yellow-500/20 text-yellow-500"
-                      }`}>
-                        {transaction.status}
-                      </span>
-                      <p className="text-xs text-muted-foreground">{transaction.time}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
+      {/* Detailed Transaction Table */}
+      <Card className="border-border/50 shadow-xl bg-card/50 backdrop-blur-sm hover:shadow-2xl transition-all duration-500">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle className="flex items-center gap-2 text-2xl">
+                <Phone className="h-6 w-6 text-blue-500" />
+                All Recharge Transactions
+              </CardTitle>
+              <CardDescription className="text-base">Complete transaction history with user details</CardDescription>
             </div>
-          </CardContent>
-        </Card>
-      </div>
+            <div className="flex gap-2">
+              <Button
+                variant={statusFilter === "All" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setStatusFilter("All")}
+                className="hover-elevate"
+              >
+                All
+              </Button>
+              <Button
+                variant={statusFilter === "Success" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setStatusFilter("Success")}
+                className="hover-elevate"
+              >
+                Success
+              </Button>
+              <Button
+                variant={statusFilter === "Pending" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setStatusFilter("Pending")}
+                className="hover-elevate"
+              >
+                Pending
+              </Button>
+              <Button
+                variant={statusFilter === "Failed" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setStatusFilter("Failed")}
+                className="hover-elevate"
+              >
+                Failed
+              </Button>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="rounded-lg border border-border/50 overflow-hidden">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>User Details</TableHead>
+                  <TableHead>Mobile & Operator</TableHead>
+                  <TableHead>Plan</TableHead>
+                  <TableHead>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
+                      className="hover:bg-transparent"
+                    >
+                      Amount
+                      <ArrowUpDown className="ml-2 h-4 w-4" />
+                    </Button>
+                  </TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Date & Time</TableHead>
+                  <TableHead>Transaction ID</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {sortedTransactions.map((txn) => (
+                  <TableRow key={txn.id} className="hover:bg-accent/50 transition-colors">
+                    <TableCell>
+                      <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+                          <User className="h-5 w-5 text-white" />
+                        </div>
+                        <div>
+                          <p className="font-semibold">{txn.userName}</p>
+                          <Badge variant={txn.userType === "Prime" ? "default" : "secondary"} className="text-xs">
+                            {txn.userType}
+                          </Badge>
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div>
+                        <p className="font-medium">{txn.mobile}</p>
+                        <p className="text-sm text-muted-foreground">{txn.operator}</p>
+                      </div>
+                    </TableCell>
+                    <TableCell className="font-medium">{txn.plan}</TableCell>
+                    <TableCell className="font-bold text-lg">₹{txn.amount}</TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={
+                          txn.status === "Success"
+                            ? "default"
+                            : txn.status === "Pending"
+                            ? "secondary"
+                            : "destructive"
+                        }
+                        className="font-semibold"
+                      >
+                        {txn.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <Calendar className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-sm">{txn.date}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="font-mono text-xs">{txn.transactionId}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

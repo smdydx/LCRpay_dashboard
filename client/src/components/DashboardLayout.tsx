@@ -1,9 +1,9 @@
-
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "./AppSidebar";
+import { AppSidebar } from "@/components/AppSidebar";
 import { BarChart3, Bell, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -46,6 +46,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
               <Button variant="outline" size="icon" className="rounded-full hover-elevate border-border/50 bg-background/50 backdrop-blur-sm hover:bg-primary/10 transition-all duration-300">
                 <Bell className="h-5 w-5" />
               </Button>
+              <ThemeToggle />
             </div>
           </header>
           <main className="flex-1 overflow-auto bg-gradient-to-br from-background via-background to-blue-500/5">
