@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, TrendingDown, TrendingUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +18,7 @@ interface StatCardProps {
 export function StatCard({ title, value, icon: Icon, trend, className, gradient }: StatCardProps) {
   const [displayValue, setDisplayValue] = useState<string>("");
   const [isAnimating, setIsAnimating] = useState(true);
+  const [isHovered, setIsHovered] = useState(false); // State for hover effect
 
   useEffect(() => {
     const valueStr = String(value);
@@ -56,41 +57,97 @@ export function StatCard({ title, value, icon: Icon, trend, className, gradient 
   const selectedGradient = gradient || "from-blue-500 to-cyan-500";
 
   return (
-    <Card className={cn(
-      "hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] border-0 overflow-hidden backdrop-blur-sm bg-card/50 animate-scale-in group",
-      className
-    )}>
-      <div className={cn("absolute inset-0 bg-gradient-to-br opacity-5 group-hover:opacity-10 transition-opacity duration-500", selectedGradient)} />
-      <CardContent className="p-6 relative">
-        <div className="flex items-center justify-between">
-          <div className="flex-1">
-            <p className="text-sm font-medium text-muted-foreground mb-3 uppercase tracking-wider">{title}</p>
+    <Card
+      className={cn(
+        "relative overflow-hidden transition-all duration-500 group cursor-pointer",
+        "before:absolute before:inset-0 before:bg-gradient-to-br before:opacity-0 before:transition-opacity before:duration-500",
+        "hover:before:opacity-5 hover:shadow-2xl hover:border-primary/30",
+        "transform hover:-translate-y-2 hover:scale-[1.02]",
+        selectedGradient && `before:${selectedGradient}`,
+        className
+      )}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Animated gradient border effect */}
+      <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div className={cn(
+          "absolute inset-0 rounded-xl blur-xl bg-gradient-to-br opacity-30",
+          selectedGradient
+        )} />
+      </div>
+
+      {/* Shimmer effect */}
+      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out">
+        <div className="h-full w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12" />
+      </div>
+
+      <CardContent className="p-6 relative z-10">
+        <div className="flex items-start justify-between">
+          <div className="space-y-3 flex-1">
+            <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+              {title}
+            </p>
             <p className={cn(
-              "text-4xl font-bold bg-gradient-to-r bg-clip-text text-transparent transition-all duration-300",
-              selectedGradient.replace("from-", "from-").replace("to-", "to-")
-            )} style={{
-              backgroundImage: `linear-gradient(to right, ${selectedGradient.includes("blue") ? "#3b82f6, #06b6d4" : selectedGradient.includes("purple") ? "#a855f7, #ec4899" : selectedGradient.includes("orange") ? "#f97316, #ef4444" : "#10b981, #059669"})`
-            }}>
-              {displayValue || value}
+              "text-4xl font-bold tracking-tight transition-all duration-500",
+              isAnimating && "animate-pulse",
+              isHovered && "text-primary scale-105"
+            )}>
+              {displayValue}
             </p>
             {trend && (
               <div className={cn(
-                "flex items-center gap-1 mt-3 text-sm font-semibold transition-all duration-300",
-                trend.isPositive ? "text-emerald-500" : "text-rose-500"
+                "flex items-center gap-2 text-sm font-semibold transition-all duration-300",
+                trend.isPositive ? "text-green-500" : "text-red-500",
+                isHovered && "scale-110"
               )}>
-                <span className="text-lg">{trend.isPositive ? "↑" : "↓"}</span>
+                {trend.isPositive ? (
+                  <TrendingUp className="h-4 w-4 animate-bounce" />
+                ) : (
+                  <TrendingDown className="h-4 w-4 animate-bounce" />
+                )}
                 <span>{Math.abs(trend.value)}%</span>
                 <span className="text-xs text-muted-foreground ml-1">vs last month</span>
               </div>
             )}
           </div>
-          <div className={cn(
-            "h-20 w-20 rounded-2xl bg-gradient-to-br flex items-center justify-center shadow-2xl transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-3",
-            selectedGradient
-          )}>
-            <Icon className="h-10 w-10 text-white drop-shadow-lg" />
+
+          {/* Icon with enhanced animations */}
+          <div className="relative">
+            {/* Glow effect */}
+            <div className={cn(
+              "absolute inset-0 rounded-2xl bg-gradient-to-br blur-2xl opacity-0 group-hover:opacity-50 transition-all duration-500",
+              selectedGradient
+            )} />
+
+            <div className={cn(
+              "relative h-20 w-20 rounded-2xl bg-gradient-to-br flex items-center justify-center shadow-2xl",
+              "transform transition-all duration-500",
+              "group-hover:scale-110 group-hover:rotate-12",
+              selectedGradient
+            )}>
+              <Icon className={cn(
+                "h-10 w-10 text-white drop-shadow-lg transition-transform duration-500",
+                isHovered && "scale-110 rotate-12"
+              )} />
+
+              {/* Pulse ring effect */}
+              <div className={cn(
+                "absolute inset-0 rounded-2xl border-2 border-white/30",
+                "animate-ping opacity-0 group-hover:opacity-100"
+              )} />
+            </div>
           </div>
         </div>
+
+        {/* Floating particles effect */}
+        {isHovered && (
+          <>
+            <div className="absolute top-4 right-4 w-2 h-2 bg-primary/40 rounded-full animate-ping" />
+            <div className="absolute bottom-6 left-8 w-1.5 h-1.5 bg-primary/30 rounded-full animate-ping animation-delay-200" />
+            <div className="absolute top-1/2 left-4 w-1 h-1 bg-primary/20 rounded-full animate-ping animation-delay-400" />
+          </>
+        )}
       </CardContent>
     </Card>
   );
