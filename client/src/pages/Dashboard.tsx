@@ -3,6 +3,13 @@ import { StatCard } from "@/components/StatCard";
 import { UserTable } from "@/components/UserTable";
 import { BBPSTable } from "@/components/BBPSTable";
 import { Users, Zap, DollarSign, TrendingUp, Crown, Smartphone, Receipt, CheckCircle, Clock } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const sampleUsers = [
   {
@@ -184,30 +191,45 @@ export default function Dashboard() {
         </p>
       </div>
 
-      {/* Stats Grid - Fully Responsive with proper breakpoints */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
-        {statCards.map((card, index) => (
-          <div
-            key={index}
-            className="w-full"
-            style={{
-              animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
-            }}
-            data-testid={`card-${card.title.toLowerCase().replace(/\s+/g, '-')}`}
-          >
-            <StatCard
-              title={card.title}
-              value={card.value}
-              icon={card.icon}
-              trend={card.trend}
-              gradient={card.gradient}
-            />
-          </div>
-        ))}
+      {/* Stats Carousel - 1 row with 4 cards, swipeable */}
+      <div className="relative px-12">
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-4 md:-ml-5 lg:-ml-6">
+            {statCards.map((card, index) => (
+              <CarouselItem 
+                key={index} 
+                className="pl-4 md:pl-5 lg:pl-6 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
+                data-testid={`card-${card.title.toLowerCase().replace(/\s+/g, '-')}`}
+              >
+                <div
+                  style={{
+                    animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
+                  }}
+                >
+                  <StatCard
+                    title={card.title}
+                    value={card.value}
+                    icon={card.icon}
+                    trend={card.trend}
+                    gradient={card.gradient}
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden sm:flex -left-6" data-testid="button-carousel-previous" />
+          <CarouselNext className="hidden sm:flex -right-6" data-testid="button-carousel-next" />
+        </Carousel>
       </div>
 
       {/* Details Section - User Table and BBPS Table */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 md:gap-5 lg:gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 md:gap-5 lg:gap-6 mt-8">
         <div className="w-full">
           <UserTable users={sampleUsers} />
         </div>
