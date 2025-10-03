@@ -189,21 +189,22 @@ export default function Dashboard() {
       </div>
 
       {/* Swipeable Carousel for all screen sizes */}
-      <div className="relative w-full overflow-hidden">
+      <div className="relative w-full overflow-hidden px-12">
         <Carousel
           opts={{
             align: "start",
             loop: false,
-            slidesToScroll: 1,
+            slidesToScroll: 4,
             containScroll: "trimSnaps",
+            dragFree: false,
           }}
           className="w-full"
         >
-          <CarouselContent className="ml-0 gap-3 lg:gap-6">
+          <CarouselContent className="ml-0 gap-4 lg:gap-6">
             {statCards.map((card, index) => (
               <CarouselItem 
                 key={index} 
-                className="basis-[280px] sm:basis-1/2 lg:basis-1/4 pl-0"
+                className="basis-[280px] sm:basis-1/2 lg:basis-[calc(25%-18px)] pl-0"
                 style={{
                   animation: `slideInFromBottom 0.6s ease-out ${index * 0.1}s both`,
                 }}
@@ -218,8 +219,8 @@ export default function Dashboard() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden lg:flex -left-4" />
-          <CarouselNext className="hidden lg:flex -right-4" />
+          <CarouselPrevious className="hidden lg:flex" />
+          <CarouselNext className="hidden lg:flex" />
         </Carousel>
       </div>
 
