@@ -3,7 +3,7 @@
 import { 
   Download, CreditCard, Wrench, Settings, ChevronDown, 
   Users, Receipt, TrendingUp, Shield, Bell, FileText,
-  Building, BarChart3, UserCircle, History, Activity, DollarSign, Zap
+  Building, BarChart3, UserCircle, History, Activity, DollarSign, Zap, Calendar
 } from "lucide-react";
 import {
   Sidebar,
