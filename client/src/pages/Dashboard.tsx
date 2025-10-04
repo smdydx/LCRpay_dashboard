@@ -220,14 +220,7 @@ export default function Dashboard() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious 
-            className="hidden sm:flex -left-6 hover-elevate transition-all duration-300 hover:scale-110" 
-            data-testid="button-carousel-previous" 
-          />
-          <CarouselNext 
-            className="hidden sm:flex -right-6 hover-elevate transition-all duration-300 hover:scale-110" 
-            data-testid="button-carousel-next" 
-          />
+          
         </Carousel>
       </div>
 
