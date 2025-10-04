@@ -1,7 +1,7 @@
 import { StatCard } from "@/components/StatCard";
 import { UserTable } from "@/components/UserTable";
 import { BBPSTable } from "@/components/BBPSTable";
-import { Users, Zap, DollarSign, TrendingUp, Crown, Smartphone, Receipt, CheckCircle, Clock, Calendar } from "lucide-react";
+import { Users, Zap, DollarSign, TrendingUp, Crown, Smartphone, Receipt, CheckCircle, Clock, Calendar, Download } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/carousel";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const sampleUsers = [
   {
@@ -195,25 +196,25 @@ export default function Dashboard() {
               Welcome back! Here's what's happening {timeFilter === "day" ? "today" : timeFilter === "week" ? "this week" : "this month"}.
             </p>
           </div>
-          
+
           {/* Time Filter Tabs with Indian Theme */}
           <Tabs value={timeFilter} onValueChange={(v) => setTimeFilter(v as "day" | "week" | "month")} className="w-full md:w-auto">
             <TabsList className="grid w-full md:w-auto grid-cols-3 bg-gradient-to-r from-blue-500/10 via-orange-500/10 to-emerald-500/10 border border-orange-200/20">
-              <TabsTrigger 
-                value="day" 
+              <TabsTrigger
+                value="day"
                 className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300"
               >
                 <Calendar className="h-4 w-4 mr-2" />
                 Day
               </TabsTrigger>
-              <TabsTrigger 
+              <TabsTrigger
                 value="week"
                 className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-orange-600 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300"
               >
                 <Calendar className="h-4 w-4 mr-2" />
                 Week
               </TabsTrigger>
-              <TabsTrigger 
+              <TabsTrigger
                 value="month"
                 className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300"
               >
@@ -251,7 +252,6 @@ export default function Dashboard() {
               </CarouselItem>
             ))}
           </CarouselContent>
-
         </Carousel>
       </div>
 
@@ -273,6 +273,28 @@ export default function Dashboard() {
           <BBPSTable services={sampleServices} />
         </div>
       </div>
+
+      {/* Footer Section - enhanced for premium look */}
+      <footer className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white py-8 px-6 rounded-xl shadow-2xl animate-fade-in-up" style={{ animationDelay: "1.3s" }}>
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-center md:text-left">
+            <h3 className="text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
+              Your Premium Dashboard
+            </h3>
+            <p className="text-gray-300">
+              Experience seamless insights and manage your business with elegance.
+            </p>
+          </div>
+          <div className="flex items-center space-x-4">
+            <a href="#" className="text-gray-300 hover:text-blue-400 transition duration-300">About</a>
+            <a href="#" className="text-gray-300 hover:text-blue-400 transition duration-300">Contact</a>
+            <a href="#" className="text-gray-300 hover:text-blue-400 transition duration-300">Privacy Policy</a>
+          </div>
+        </div>
+        <div className="mt-8 text-center text-gray-400 text-sm">
+          © {new Date().getFullYear()} Your Company. All rights reserved.
+        </div>
+      </footer>
     </div>
   );
 }
