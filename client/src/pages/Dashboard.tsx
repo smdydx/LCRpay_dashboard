@@ -204,10 +204,10 @@ export default function Dashboard() {
             {statCards.map((card, index) => (
               <CarouselItem 
                 key={index} 
-                className="pl-3 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
                 data-testid={`card-${card.title.toLowerCase().replace(/\s+/g, '-')}`}
                 style={{
-                  animation: `slideInFromBottom 0.6s ease-out ${0.3 + index * 0.08}s both`,
+                  animation: `slideInFromBottom 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) ${0.3 + index * 0.1}s both`,
                 }}
               >
                 <StatCard
