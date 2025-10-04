@@ -233,6 +233,25 @@ export function AppSidebar() {
       
       {/* Professional Sidebar Footer */}
       <div className="mt-auto border-t border-border/50 bg-gradient-to-b from-background to-background/80">
+        {/* Time Period Filter */}
+        <div className="px-4 py-3 border-b border-border/30">
+          <div className="text-xs text-muted-foreground mb-2 flex items-center gap-2">
+            <Calendar className="h-3 w-3" />
+            <span>Time Period</span>
+          </div>
+          <div className="grid grid-cols-3 gap-1">
+            <button className="px-2 py-1.5 text-xs rounded-md bg-gradient-to-r from-blue-500/20 to-blue-500/10 hover:from-blue-500 hover:to-blue-600 hover:text-white border border-blue-500/30 transition-all duration-200">
+              Day
+            </button>
+            <button className="px-2 py-1.5 text-xs rounded-md bg-gradient-to-r from-orange-500/20 to-orange-500/10 hover:from-orange-500 hover:to-orange-600 hover:text-white border border-orange-500/30 transition-all duration-200">
+              Week
+            </button>
+            <button className="px-2 py-1.5 text-xs rounded-md bg-gradient-to-r from-emerald-500/20 to-emerald-500/10 hover:from-emerald-500 hover:to-emerald-600 hover:text-white border border-emerald-500/30 transition-all duration-200">
+              Month
+            </button>
+          </div>
+        </div>
+        
         {/* Quick Stats */}
         <div className="px-4 py-3 space-y-2">
           <div className="flex items-center justify-between text-xs">

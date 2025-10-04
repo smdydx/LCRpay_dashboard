@@ -26,24 +26,40 @@ export function StatCard({ title, value, icon: Icon, trend, prefix = "", gradien
       {/* Premium Glass Morphism Layer */}
       <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-xl opacity-70" />
       
-      {/* Subtle Geometric Pattern Background */}
-      <div className="absolute inset-0 opacity-20">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <circle cx="20" cy="20" r="1" fill="white" opacity="0.3"/>
-              <circle cx="0" cy="0" r="1" fill="white" opacity="0.3"/>
-              <circle cx="40" cy="0" r="1" fill="white" opacity="0.3"/>
-              <circle cx="0" cy="40" r="1" fill="white" opacity="0.3"/>
-              <circle cx="40" cy="40" r="1" fill="white" opacity="0.3"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
+      {/* Indian Leaf & Vine Decorative Elements */}
+      <div className="absolute inset-0 opacity-15 pointer-events-none">
+        {/* Top Left Leaf Pattern */}
+        <svg className="absolute -top-2 -left-2 w-20 h-20" viewBox="0 0 100 100">
+          <path d="M10,50 Q30,10 50,30 Q70,50 50,70 Q30,90 10,50 Z" fill="white" opacity="0.3"/>
+          <path d="M10,50 Q20,30 30,40 Q40,50 30,60 Q20,70 10,50 Z" fill="white" opacity="0.5"/>
+        </svg>
+        
+        {/* Bottom Right Vine Pattern */}
+        <svg className="absolute -bottom-3 -right-3 w-24 h-24" viewBox="0 0 100 100">
+          <path d="M90,10 Q70,30 60,50 Q50,70 70,90" stroke="white" strokeWidth="2" fill="none" opacity="0.4"/>
+          <circle cx="70" cy="30" r="4" fill="white" opacity="0.5"/>
+          <circle cx="60" cy="50" r="3" fill="white" opacity="0.5"/>
+          <circle cx="70" cy="70" r="4" fill="white" opacity="0.5"/>
+          {/* Leaf shapes */}
+          <path d="M75,25 Q80,30 75,35 Q70,30 75,25 Z" fill="white" opacity="0.4"/>
+          <path d="M65,45 Q70,50 65,55 Q60,50 65,45 Z" fill="white" opacity="0.4"/>
+        </svg>
+        
+        {/* Top Right Corner Patta Pattern */}
+        <svg className="absolute top-0 right-0 w-16 h-16" viewBox="0 0 80 80">
+          <path d="M80,0 L80,20 Q70,15 60,20 L80,0 Z" fill="white" opacity="0.3"/>
+          <path d="M70,10 Q65,15 60,20" stroke="white" strokeWidth="1" fill="none" opacity="0.4"/>
+        </svg>
+        
+        {/* Bottom Left Corner Design */}
+        <svg className="absolute bottom-0 left-0 w-16 h-16" viewBox="0 0 80 80">
+          <path d="M0,80 L20,80 Q15,70 20,60 L0,80 Z" fill="white" opacity="0.3"/>
+          <circle cx="15" cy="70" r="2" fill="white" opacity="0.5"/>
         </svg>
       </div>
 
-      {/* Subtle Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-white/10 opacity-50" />
+      {/* Subtle Gradient Overlay with Indian Colors */}
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-amber-50/5 to-orange-50/10 opacity-50" />
 
       <CardContent className="relative p-6 z-10">
         <div className="flex items-start justify-between gap-4">
