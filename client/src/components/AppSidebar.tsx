@@ -167,59 +167,120 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      {/* Animated Leaf Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-        {/* Floating Leaves */}
-        <div className="absolute top-10 left-8 animate-float-slow">
-          <svg width="40" height="40" viewBox="0 0 40 40" className="text-emerald-500/40">
-            <path d="M20,5 Q30,15 25,30 Q20,35 15,30 Q10,15 20,5 Z" fill="currentColor" opacity="0.6"/>
-            <path d="M20,5 L20,30" stroke="currentColor" strokeWidth="1" opacity="0.4"/>
-          </svg>
-        </div>
-        
-        <div className="absolute top-32 right-6 animate-float-slow-delayed">
-          <svg width="35" height="35" viewBox="0 0 35 35" className="text-blue-500/40">
-            <path d="M17.5,3 Q26,12 22,25 Q17.5,30 13,25 Q9,12 17.5,3 Z" fill="currentColor" opacity="0.6"/>
-            <path d="M17.5,3 L17.5,25" stroke="currentColor" strokeWidth="0.8" opacity="0.4"/>
-          </svg>
-        </div>
+      {/* Animated Root/Vine Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
+        {/* Animated Root Systems */}
+        <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 300 1000">
+          {/* Main Root 1 - Left Side */}
+          <g className="animate-pulse-slow" style={{ animationDelay: '0s' }}>
+            <path d="M 30,0 Q 35,100 25,200 Q 15,300 30,400 Q 45,500 35,600 Q 25,700 30,800 Q 35,900 30,1000" 
+                  stroke="url(#gradient1)" 
+                  strokeWidth="3" 
+                  fill="none" 
+                  className="opacity-60"
+                  strokeDasharray="10,5"/>
+            <circle cx="30" cy="0" r="5" fill="url(#gradient1)" className="animate-pulse"/>
+            <circle cx="25" cy="200" r="4" fill="url(#gradient1)" className="animate-pulse" style={{ animationDelay: '0.3s' }}/>
+            <circle cx="30" cy="400" r="4" fill="url(#gradient1)" className="animate-pulse" style={{ animationDelay: '0.6s' }}/>
+            <circle cx="35" cy="600" r="4" fill="url(#gradient1)" className="animate-pulse" style={{ animationDelay: '0.9s' }}/>
+            <circle cx="30" cy="800" r="4" fill="url(#gradient1)" className="animate-pulse" style={{ animationDelay: '1.2s' }}/>
+          </g>
 
-        <div className="absolute top-64 left-4 animate-float">
-          <svg width="30" height="30" viewBox="0 0 30 30" className="text-orange-500/40">
-            <path d="M15,4 Q22,11 19,22 Q15,26 11,22 Q8,11 15,4 Z" fill="currentColor" opacity="0.6"/>
-            <path d="M15,4 L15,22" stroke="currentColor" strokeWidth="0.7" opacity="0.4"/>
-          </svg>
-        </div>
+          {/* Main Root 2 - Right Side */}
+          <g className="animate-pulse-slow" style={{ animationDelay: '0.5s' }}>
+            <path d="M 270,0 Q 265,120 275,240 Q 285,360 270,480 Q 255,600 265,720 Q 275,840 270,960" 
+                  stroke="url(#gradient2)" 
+                  strokeWidth="2.5" 
+                  fill="none" 
+                  className="opacity-60"
+                  strokeDasharray="8,4"/>
+            <circle cx="270" cy="0" r="4" fill="url(#gradient2)" className="animate-pulse" style={{ animationDelay: '0.2s' }}/>
+            <circle cx="275" cy="240" r="3" fill="url(#gradient2)" className="animate-pulse" style={{ animationDelay: '0.5s' }}/>
+            <circle cx="270" cy="480" r="3" fill="url(#gradient2)" className="animate-pulse" style={{ animationDelay: '0.8s' }}/>
+            <circle cx="265" cy="720" r="3" fill="url(#gradient2)" className="animate-pulse" style={{ animationDelay: '1.1s' }}/>
+          </g>
 
-        <div className="absolute bottom-40 right-8 animate-float-slow">
-          <svg width="45" height="45" viewBox="0 0 45 45" className="text-purple-500/40">
-            <path d="M22.5,5 Q33,16 28,32 Q22.5,38 17,32 Q12,16 22.5,5 Z" fill="currentColor" opacity="0.6"/>
-            <path d="M22.5,5 L22.5,32" stroke="currentColor" strokeWidth="1.2" opacity="0.4"/>
-          </svg>
-        </div>
+          {/* Branching Roots */}
+          <g className="animate-pulse-slow" style={{ animationDelay: '0.3s' }}>
+            <path d="M 30,150 Q 80,160 130,150" 
+                  stroke="url(#gradient3)" 
+                  strokeWidth="2" 
+                  fill="none" 
+                  className="opacity-50"/>
+            <path d="M 30,350 Q 90,370 150,350" 
+                  stroke="url(#gradient3)" 
+                  strokeWidth="2" 
+                  fill="none" 
+                  className="opacity-50"/>
+            <path d="M 270,300 Q 220,310 170,300" 
+                  stroke="url(#gradient2)" 
+                  strokeWidth="2" 
+                  fill="none" 
+                  className="opacity-50"/>
+            <path d="M 270,500 Q 210,520 150,500" 
+                  stroke="url(#gradient2)" 
+                  strokeWidth="2" 
+                  fill="none" 
+                  className="opacity-50"/>
+          </g>
 
-        <div className="absolute bottom-16 left-10 animate-float-slow-delayed">
-          <svg width="38" height="38" viewBox="0 0 38 38" className="text-pink-500/40">
-            <path d="M19,4 Q28,13 24,27 Q19,32 14,27 Q10,13 19,4 Z" fill="currentColor" opacity="0.6"/>
-            <path d="M19,4 L19,27" stroke="currentColor" strokeWidth="1" opacity="0.4"/>
-          </svg>
-        </div>
+          {/* Small Root Details */}
+          <g className="animate-float-slow">
+            <path d="M 60,100 Q 70,130 65,160" stroke="url(#gradient1)" strokeWidth="1.5" fill="none" opacity="0.4"/>
+            <path d="M 240,200 Q 230,230 235,260" stroke="url(#gradient2)" strokeWidth="1.5" fill="none" opacity="0.4"/>
+            <path d="M 50,400 Q 60,430 55,460" stroke="url(#gradient3)" strokeWidth="1.5" fill="none" opacity="0.4"/>
+            <path d="M 250,600 Q 240,630 245,660" stroke="url(#gradient2)" strokeWidth="1.5" fill="none" opacity="0.4"/>
+          </g>
 
-        {/* Decorative Vines */}
-        <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 300 800">
-          <path d="M20,50 Q40,100 30,150 Q20,200 35,250 Q50,300 40,350" 
-                stroke="currentColor" 
-                strokeWidth="1.5" 
-                fill="none" 
-                className="text-emerald-500/20" 
-                opacity="0.5"/>
-          <path d="M280,100 Q260,150 270,200 Q280,250 265,300 Q250,350 260,400" 
-                stroke="currentColor" 
-                strokeWidth="1.5" 
-                fill="none" 
-                className="text-blue-500/20" 
-                opacity="0.5"/>
+          {/* Gradients */}
+          <defs>
+            <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#10b981" stopOpacity="0.8"/>
+              <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.6"/>
+              <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.4"/>
+            </linearGradient>
+            <linearGradient id="gradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.8"/>
+              <stop offset="50%" stopColor="#ec4899" stopOpacity="0.6"/>
+              <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.4"/>
+            </linearGradient>
+            <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#10b981" stopOpacity="0.7"/>
+              <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.5"/>
+            </linearGradient>
+          </defs>
         </svg>
+
+        {/* Floating Root Nodes */}
+        <div className="absolute top-20 left-12 animate-float-slow">
+          <div className="w-3 h-3 rounded-full bg-gradient-to-br from-emerald-500 to-blue-500 opacity-60 animate-pulse"/>
+        </div>
+        <div className="absolute top-40 right-12 animate-float-slow-delayed">
+          <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-br from-orange-500 to-pink-500 opacity-60 animate-pulse"/>
+        </div>
+        <div className="absolute top-60 left-16 animate-float">
+          <div className="w-2 h-2 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 opacity-60 animate-pulse"/>
+        </div>
+        <div className="absolute bottom-60 right-16 animate-float-slow">
+          <div className="w-3 h-3 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 opacity-60 animate-pulse"/>
+        </div>
+        <div className="absolute bottom-40 left-14 animate-float-slow-delayed">
+          <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-br from-emerald-500 to-orange-500 opacity-60 animate-pulse"/>
+        </div>
+
+        {/* Enhanced Leaf Elements */}
+        <div className="absolute top-32 left-20 animate-float-slow">
+          <svg width="25" height="25" viewBox="0 0 25 25" className="text-emerald-500/50">
+            <path d="M12.5,3 Q18,9 16,18 Q12.5,22 9,18 Q7,9 12.5,3 Z" fill="currentColor" opacity="0.7"/>
+            <path d="M12.5,3 L12.5,18" stroke="currentColor" strokeWidth="0.8" opacity="0.5"/>
+          </svg>
+        </div>
+        <div className="absolute top-80 right-20 animate-float-slow-delayed">
+          <svg width="28" height="28" viewBox="0 0 28 28" className="text-blue-500/50">
+            <path d="M14,3 Q20,10 17,20 Q14,25 11,20 Q8,10 14,3 Z" fill="currentColor" opacity="0.7"/>
+            <path d="M14,3 L14,20" stroke="currentColor" strokeWidth="0.9" opacity="0.5"/>
+          </svg>
+        </div>
       </div>
 
       <SidebarContent className="relative z-10">
