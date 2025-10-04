@@ -1,4 +1,3 @@
-
 import { StatCard } from "@/components/StatCard";
 import { UserTable } from "@/components/UserTable";
 import { BBPSTable } from "@/components/BBPSTable";
@@ -132,28 +131,28 @@ const statCards = [
     value: "15,847",
     icon: Users,
     trend: { value: 8.2, isPositive: true },
-    gradient: "from-purple-500 to-pink-500",
+    gradient: "from-[#667eea] via-[#764ba2] to-[#f093fb]",
   },
   {
     title: "Prime Users",
     value: "3,421",
     icon: Crown,
     trend: { value: 18.7, isPositive: true },
-    gradient: "from-yellow-500 to-orange-500",
+    gradient: "from-[#f093fb] via-[#f5576c] to-[#ffd700]",
   },
   {
     title: "Total Recharges",
     value: "28,456",
     icon: Smartphone,
     trend: { value: 10.4, isPositive: true },
-    gradient: "from-indigo-500 to-blue-500",
+    gradient: "from-[#4facfe] via-[#00f2fe] to-[#43e97b]",
   },
   {
     title: "BBPS Payments",
     value: "12,234",
     icon: Receipt,
     trend: { value: 14.8, isPositive: true },
-    gradient: "from-pink-500 to-rose-500",
+    gradient: "from-[#fa709a] via-[#fee140] to-[#ff6b6b]",
   },
   {
     title: "Success Rate",
@@ -202,8 +201,8 @@ export default function Dashboard() {
         >
           <CarouselContent className="-ml-3">
             {statCards.map((card, index) => (
-              <CarouselItem 
-                key={index} 
+              <CarouselItem
+                key={index}
                 className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
                 data-testid={`card-${card.title.toLowerCase().replace(/\s+/g, '-')}`}
                 style={{
@@ -220,22 +219,22 @@ export default function Dashboard() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          
+
         </Carousel>
       </div>
 
       {/* Details Section with fade-in animation */}
-      <div 
+      <div
         className="grid grid-cols-1 xl:grid-cols-2 gap-4 md:gap-5 lg:gap-6 mt-8"
         style={{ animation: "fade-in 0.8s ease-out 1s both" }}
       >
-        <div 
+        <div
           className="w-full"
           style={{ animation: "slide-in-right 0.7s ease-out 1.1s both" }}
         >
           <UserTable users={sampleUsers} />
         </div>
-        <div 
+        <div
           className="w-full"
           style={{ animation: "slide-in-right 0.7s ease-out 1.2s both" }}
         >
