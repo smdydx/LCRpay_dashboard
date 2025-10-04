@@ -14,85 +14,56 @@ interface StatCardProps {
   gradient?: string;
 }
 
-export function StatCard({
-  title,
-  value,
-  icon: Icon,
-  trend,
-  prefix = "",
-  gradient = "from-blue-500 to-purple-500"
-}: StatCardProps) {
+export function StatCard({ title, value, icon: Icon, trend, prefix = "", gradient = "from-blue-500 to-purple-600" }: StatCardProps) {
   return (
     <Card className={cn(
-      "relative overflow-hidden border-0 group transition-all duration-700 hover:scale-[1.02] hover:shadow-2xl h-full",
-      "bg-gradient-to-br animate-card-enter",
-      gradient
+      "group relative overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500",
+      "bg-gradient-to-br", gradient,
+      "hover:scale-[1.02] cursor-pointer"
     )}>
-      {/* Shimmer animation on hover */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1500 ease-out">
-          <div className="h-full w-32 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12" />
-        </div>
-      </div>
-
-      {/* Animated glowing border */}
-      <div className={cn(
-        "absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500",
-        "before:absolute before:inset-0 before:rounded-xl before:p-[2px]",
-        "before:bg-gradient-to-br before:from-white/50 before:to-transparent",
-        "before:-z-10 before:animate-pulse-slow"
-      )} />
-
-      {/* Floating background orbs */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-0 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 bg-white rounded-full blur-3xl animate-float-slow" />
-        <div className="absolute bottom-0 right-0 w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 bg-white rounded-full blur-3xl animate-float-slow-delayed" />
-      </div>
-
-      <CardContent className="p-4 sm:p-5 md:p-6 relative z-10">
-        <div className="flex items-start justify-between gap-2 sm:gap-3">
-          <div className="space-y-1 sm:space-y-2 flex-1 min-w-0">
-            {/* Title - Responsive text */}
-            <p className="text-[9px] xs:text-[10px] sm:text-xs font-bold text-white/90 uppercase tracking-wider drop-shadow-lg line-clamp-2">
+      <CardContent className="p-5">
+        <div className="flex items-start justify-between gap-3">
+          {/* Left section - Title and Value */}
+          <div className="flex-1 min-w-0">
+            {/* Title - Compact */}
+            <p className="text-white/80 text-xs font-medium mb-2 truncate">
               {title}
             </p>
 
-            {/* Value - Fluid responsive sizing */}
-            <div className="flex items-baseline gap-1 flex-wrap">
+            {/* Value - Prominent */}
+            <div className="flex items-baseline gap-1 mb-2">
               {prefix && (
-                <span className="text-base xs:text-lg sm:text-xl md:text-2xl font-black text-white drop-shadow-2xl">
+                <span className="text-white font-bold text-lg">
                   {prefix}
                 </span>
               )}
-              <h3 className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white drop-shadow-2xl break-all">
+              <h3 className="text-white font-bold text-2xl tracking-tight truncate">
                 {typeof value === 'number' ? value.toLocaleString() : value}
               </h3>
             </div>
 
-            {/* Trend - Responsive badge */}
+            {/* Trend - Compact badge */}
             {trend && (
               <div className={cn(
-                "inline-flex items-center gap-1 px-2 py-0.5 sm:py-1 rounded-full text-[9px] xs:text-[10px] sm:text-xs font-bold backdrop-blur-md",
-                "transition-all duration-300 group-hover:scale-105",
-                trend.isPositive
-                  ? "bg-white/20 text-white"
-                  : "bg-white/20 text-white"
+                "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold backdrop-blur-md",
+                "transition-all duration-300",
+                "bg-white/20 text-white"
               )}>
                 <span className={cn(
-                  "text-xs sm:text-sm",
+                  "text-xs",
                   trend.isPositive ? "text-green-300" : "text-red-300"
                 )}>
                   {trend.isPositive ? "↑" : "↓"}
                 </span>
-                <span className="drop-shadow whitespace-nowrap">{Math.abs(trend.value)}%</span>
+                <span className="drop-shadow">{Math.abs(trend.value)}%</span>
               </div>
             )}
           </div>
 
-          {/* Icon - Responsive sizing */}
+          {/* Right section - Icon */}
           <div className="flex-shrink-0">
-            <div className="p-1.5 xs:p-2 sm:p-2.5 md:p-3 bg-white/20 rounded-lg sm:rounded-xl backdrop-blur-md group-hover:bg-white/30 transition-all duration-300 shadow-lg group-hover:rotate-12 group-hover:scale-110">
-              <Icon className="h-4 w-4 xs:h-5 xs:w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-white drop-shadow-lg" />
+            <div className="p-2.5 bg-white/20 rounded-xl backdrop-blur-md group-hover:bg-white/30 transition-all duration-300 shadow-lg group-hover:rotate-12 group-hover:scale-110">
+              <Icon className="h-6 w-6 text-white drop-shadow-lg" />
             </div>
           </div>
         </div>

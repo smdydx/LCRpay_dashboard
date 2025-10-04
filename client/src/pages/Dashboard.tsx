@@ -192,7 +192,7 @@ export default function Dashboard() {
       </div>
 
       {/* Stats Carousel with stagger animation */}
-      <div className="relative px-12 animate-scale-in" style={{ animationDelay: "0.2s" }}>
+      <div className="relative px-0 sm:px-12 animate-scale-in" style={{ animationDelay: "0.2s" }}>
         <Carousel
           opts={{
             align: "start",
@@ -200,11 +200,11 @@ export default function Dashboard() {
           }}
           className="w-full"
         >
-          <CarouselContent className="-ml-4 md:-ml-5 lg:-ml-6">
+          <CarouselContent className="-ml-3">
             {statCards.map((card, index) => (
               <CarouselItem 
                 key={index} 
-                className="pl-4 md:pl-5 lg:pl-6 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
+                className="pl-3 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
                 data-testid={`card-${card.title.toLowerCase().replace(/\s+/g, '-')}`}
                 style={{
                   animation: `slideInFromBottom 0.6s ease-out ${0.3 + index * 0.08}s both`,
