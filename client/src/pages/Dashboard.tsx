@@ -185,44 +185,15 @@ export default function Dashboard() {
 
   return (
     <div className="p-4 sm:p-5 md:p-6 lg:p-8 space-y-6 md:space-y-8 animate-fade-in">
-      {/* Header Section with gradient animation and filter */}
+      {/* Header Section with gradient animation */}
       <div className="mb-4 md:mb-6 animate-slide-in-up">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <div>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-600 via-orange-500 to-emerald-600 bg-clip-text text-transparent animate-gradient">
-              Dashboard
-            </h2>
-            <p className="text-sm md:text-base text-muted-foreground mt-2" style={{ animation: "slide-in-up 0.7s ease-out 0.1s both" }}>
-              Welcome back! Here's what's happening {timeFilter === "day" ? "today" : timeFilter === "week" ? "this week" : "this month"}.
-            </p>
-          </div>
-
-          {/* Time Filter Tabs with Indian Theme */}
-          <Tabs value={timeFilter} onValueChange={(v) => setTimeFilter(v as "day" | "week" | "month")} className="w-full md:w-auto">
-            <TabsList className="grid w-full md:w-auto grid-cols-3 bg-gradient-to-r from-blue-500/10 via-orange-500/10 to-emerald-500/10 border border-orange-200/20">
-              <TabsTrigger
-                value="day"
-                className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300"
-              >
-                <Calendar className="h-4 w-4 mr-2" />
-                Day
-              </TabsTrigger>
-              <TabsTrigger
-                value="week"
-                className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-orange-600 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300"
-              >
-                <Calendar className="h-4 w-4 mr-2" />
-                Week
-              </TabsTrigger>
-              <TabsTrigger
-                value="month"
-                className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-lg transition-all duration-300"
-              >
-                <Calendar className="h-4 w-4 mr-2" />
-                Month
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
+        <div>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-600 via-orange-500 to-emerald-600 bg-clip-text text-transparent animate-gradient">
+            Dashboard
+          </h2>
+          <p className="text-sm md:text-base text-muted-foreground mt-2" style={{ animation: "slide-in-up 0.7s ease-out 0.1s both" }}>
+            Welcome back! Here's what's happening {timeFilter === "day" ? "today" : timeFilter === "week" ? "this week" : "this month"}.
+          </p>
         </div>
       </div>
 
