@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowUpDown, Users } from "lucide-react";
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { UserDetailDialog } from "./UserDetailDialog";
 
 type UserType = "All" | "Prime" | "Normal";
 
@@ -32,6 +33,13 @@ interface UserTableProps {
 export function UserTable({ users = [] }: UserTableProps) {
   const [userType, setUserType] = useState<UserType>("All");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleUserClick = (user: User) => {
+    setSelectedUser(user);
+    setIsDialogOpen(true);
+  };
 
   const filteredUsers = (users || []).filter(user =>
     userType === "All" ? true : user.userType === userType
@@ -111,9 +119,10 @@ export function UserTable({ users = [] }: UserTableProps) {
               {sortedUsers.map((user, index) => (
                 <TableRow 
                   key={user.id} 
-                  className="hover:bg-accent/50 transition-all duration-300 hover:scale-[1.01]"
+                  className="hover:bg-accent/50 transition-all duration-300 hover:scale-[1.01] cursor-pointer"
                   style={{ animation: `fade-in 0.4s ease-out ${index * 0.1}s both` }}
                   data-testid={`row-user-${user.id}`}
+                  onClick={() => handleUserClick(user)}
                 >
                   <TableCell>
                     <div>
@@ -148,6 +157,12 @@ export function UserTable({ users = [] }: UserTableProps) {
           </Table>
         </div>
       </CardContent>
+      
+      <UserDetailDialog 
+        user={selectedUser}
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+      />
     </Card>
   );
 }

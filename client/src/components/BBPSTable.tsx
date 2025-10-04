@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown, Receipt } from "lucide-react";
 import { useState } from "react";
+import { BBPSDetailDialog } from "./BBPSDetailDialog";
 
 type StatusFilter = "All" | "Success" | "Pending" | "Failed";
 
@@ -31,6 +32,7 @@ interface BBPSTableProps {
 export function BBPSTable({ services = [] }: BBPSTableProps) {
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("All");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [selectedService, setSelectedService] = useState<BBPSService | null>(null);
 
   const filteredServices = services.filter(service =>
     statusFilter === "All" ? true : service.status === statusFilter
@@ -41,6 +43,14 @@ export function BBPSTable({ services = [] }: BBPSTableProps) {
       ? a.amount - b.amount
       : b.amount - a.amount;
   });
+
+  const handleRowClick = (service: BBPSService) => {
+    setSelectedService(service);
+  };
+
+  const handleCloseDialog = () => {
+    setSelectedService(null);
+  };
 
   return (
     <Card className="border-border/50 shadow-xl bg-card/50 backdrop-blur-sm hover:shadow-2xl transition-all duration-700 overflow-hidden group">
@@ -108,11 +118,12 @@ export function BBPSTable({ services = [] }: BBPSTableProps) {
             </TableHeader>
             <TableBody>
               {sortedServices.map((service, index) => (
-                <TableRow 
-                  key={service.id} 
-                  className="hover:bg-accent/50 transition-all duration-300 hover:scale-[1.01]"
+                <TableRow
+                  key={service.id}
+                  className="hover:bg-accent/50 transition-all duration-300 hover:scale-[1.01] cursor-pointer"
                   style={{ animation: `fade-in 0.4s ease-out ${index * 0.1}s both` }}
                   data-testid={`row-service-${service.id}`}
+                  onClick={() => handleRowClick(service)}
                 >
                   <TableCell>
                     <div className="flex flex-col">
@@ -136,8 +147,8 @@ export function BBPSTable({ services = [] }: BBPSTableProps) {
                       {service.status}
                     </Badge>
                   </TableCell>
-                  <TableCell 
-                    className="font-bold text-sm md:text-lg text-right" 
+                  <TableCell
+                    className="font-bold text-sm md:text-lg text-right"
                     data-testid={`text-amount-${service.id}`}
                   >
                     ₹{service.amount.toLocaleString()}
@@ -148,6 +159,11 @@ export function BBPSTable({ services = [] }: BBPSTableProps) {
           </Table>
         </div>
       </CardContent>
+      <BBPSDetailDialog
+        isOpen={!!selectedService}
+        onClose={handleCloseDialog}
+        service={selectedService}
+      />
     </Card>
   );
 }
