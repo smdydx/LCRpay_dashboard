@@ -167,69 +167,63 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      {/* Animated Root/Vine Background */}
+      {/* Static Decorative Root/Vine Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
-        {/* Animated Root Systems */}
+        {/* Static Root Systems */}
         <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 300 1000">
           {/* Main Root 1 - Left Side */}
-          <g className="animate-pulse-slow" style={{ animationDelay: '0s' }}>
+          <g className="opacity-60">
             <path d="M 30,0 Q 35,100 25,200 Q 15,300 30,400 Q 45,500 35,600 Q 25,700 30,800 Q 35,900 30,1000" 
                   stroke="url(#gradient1)" 
                   strokeWidth="3" 
                   fill="none" 
-                  className="opacity-60"
                   strokeDasharray="10,5"/>
-            <circle cx="30" cy="0" r="5" fill="url(#gradient1)" className="animate-pulse"/>
-            <circle cx="25" cy="200" r="4" fill="url(#gradient1)" className="animate-pulse" style={{ animationDelay: '0.3s' }}/>
-            <circle cx="30" cy="400" r="4" fill="url(#gradient1)" className="animate-pulse" style={{ animationDelay: '0.6s' }}/>
-            <circle cx="35" cy="600" r="4" fill="url(#gradient1)" className="animate-pulse" style={{ animationDelay: '0.9s' }}/>
-            <circle cx="30" cy="800" r="4" fill="url(#gradient1)" className="animate-pulse" style={{ animationDelay: '1.2s' }}/>
+            <circle cx="30" cy="0" r="5" fill="url(#gradient1)" opacity="0.8"/>
+            <circle cx="25" cy="200" r="4" fill="url(#gradient1)" opacity="0.7"/>
+            <circle cx="30" cy="400" r="4" fill="url(#gradient1)" opacity="0.8"/>
+            <circle cx="35" cy="600" r="4" fill="url(#gradient1)" opacity="0.7"/>
+            <circle cx="30" cy="800" r="4" fill="url(#gradient1)" opacity="0.8"/>
           </g>
 
           {/* Main Root 2 - Right Side */}
-          <g className="animate-pulse-slow" style={{ animationDelay: '0.5s' }}>
+          <g className="opacity-60">
             <path d="M 270,0 Q 265,120 275,240 Q 285,360 270,480 Q 255,600 265,720 Q 275,840 270,960" 
                   stroke="url(#gradient2)" 
                   strokeWidth="2.5" 
                   fill="none" 
-                  className="opacity-60"
                   strokeDasharray="8,4"/>
-            <circle cx="270" cy="0" r="4" fill="url(#gradient2)" className="animate-pulse" style={{ animationDelay: '0.2s' }}/>
-            <circle cx="275" cy="240" r="3" fill="url(#gradient2)" className="animate-pulse" style={{ animationDelay: '0.5s' }}/>
-            <circle cx="270" cy="480" r="3" fill="url(#gradient2)" className="animate-pulse" style={{ animationDelay: '0.8s' }}/>
-            <circle cx="265" cy="720" r="3" fill="url(#gradient2)" className="animate-pulse" style={{ animationDelay: '1.1s' }}/>
+            <circle cx="270" cy="0" r="4" fill="url(#gradient2)" opacity="0.7"/>
+            <circle cx="275" cy="240" r="3" fill="url(#gradient2)" opacity="0.8"/>
+            <circle cx="270" cy="480" r="3" fill="url(#gradient2)" opacity="0.7"/>
+            <circle cx="265" cy="720" r="3" fill="url(#gradient2)" opacity="0.8"/>
           </g>
 
           {/* Branching Roots */}
-          <g className="animate-pulse-slow" style={{ animationDelay: '0.3s' }}>
+          <g className="opacity-50">
             <path d="M 30,150 Q 80,160 130,150" 
                   stroke="url(#gradient3)" 
                   strokeWidth="2" 
-                  fill="none" 
-                  className="opacity-50"/>
+                  fill="none"/>
             <path d="M 30,350 Q 90,370 150,350" 
                   stroke="url(#gradient3)" 
                   strokeWidth="2" 
-                  fill="none" 
-                  className="opacity-50"/>
+                  fill="none"/>
             <path d="M 270,300 Q 220,310 170,300" 
                   stroke="url(#gradient2)" 
                   strokeWidth="2" 
-                  fill="none" 
-                  className="opacity-50"/>
+                  fill="none"/>
             <path d="M 270,500 Q 210,520 150,500" 
                   stroke="url(#gradient2)" 
                   strokeWidth="2" 
-                  fill="none" 
-                  className="opacity-50"/>
+                  fill="none"/>
           </g>
 
           {/* Small Root Details */}
-          <g className="animate-float-slow">
-            <path d="M 60,100 Q 70,130 65,160" stroke="url(#gradient1)" strokeWidth="1.5" fill="none" opacity="0.4"/>
-            <path d="M 240,200 Q 230,230 235,260" stroke="url(#gradient2)" strokeWidth="1.5" fill="none" opacity="0.4"/>
-            <path d="M 50,400 Q 60,430 55,460" stroke="url(#gradient3)" strokeWidth="1.5" fill="none" opacity="0.4"/>
-            <path d="M 250,600 Q 240,630 245,660" stroke="url(#gradient2)" strokeWidth="1.5" fill="none" opacity="0.4"/>
+          <g className="opacity-40">
+            <path d="M 60,100 Q 70,130 65,160" stroke="url(#gradient1)" strokeWidth="1.5" fill="none"/>
+            <path d="M 240,200 Q 230,230 235,260" stroke="url(#gradient2)" strokeWidth="1.5" fill="none"/>
+            <path d="M 50,400 Q 60,430 55,460" stroke="url(#gradient3)" strokeWidth="1.5" fill="none"/>
+            <path d="M 250,600 Q 240,630 245,660" stroke="url(#gradient2)" strokeWidth="1.5" fill="none"/>
           </g>
 
           {/* Gradients */}
@@ -251,31 +245,31 @@ export function AppSidebar() {
           </defs>
         </svg>
 
-        {/* Floating Root Nodes */}
-        <div className="absolute top-20 left-12 animate-float-slow">
-          <div className="w-3 h-3 rounded-full bg-gradient-to-br from-emerald-500 to-blue-500 opacity-60 animate-pulse"/>
+        {/* Static Root Nodes */}
+        <div className="absolute top-20 left-12">
+          <div className="w-3 h-3 rounded-full bg-gradient-to-br from-emerald-500 to-blue-500 opacity-60"/>
         </div>
-        <div className="absolute top-40 right-12 animate-float-slow-delayed">
-          <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-br from-orange-500 to-pink-500 opacity-60 animate-pulse"/>
+        <div className="absolute top-40 right-12">
+          <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-br from-orange-500 to-pink-500 opacity-60"/>
         </div>
-        <div className="absolute top-60 left-16 animate-float">
-          <div className="w-2 h-2 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 opacity-60 animate-pulse"/>
+        <div className="absolute top-60 left-16">
+          <div className="w-2 h-2 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 opacity-60"/>
         </div>
-        <div className="absolute bottom-60 right-16 animate-float-slow">
-          <div className="w-3 h-3 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 opacity-60 animate-pulse"/>
+        <div className="absolute bottom-60 right-16">
+          <div className="w-3 h-3 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 opacity-60"/>
         </div>
-        <div className="absolute bottom-40 left-14 animate-float-slow-delayed">
-          <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-br from-emerald-500 to-orange-500 opacity-60 animate-pulse"/>
+        <div className="absolute bottom-40 left-14">
+          <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-br from-emerald-500 to-orange-500 opacity-60"/>
         </div>
 
-        {/* Enhanced Leaf Elements */}
-        <div className="absolute top-32 left-20 animate-float-slow">
+        {/* Static Leaf Elements */}
+        <div className="absolute top-32 left-20">
           <svg width="25" height="25" viewBox="0 0 25 25" className="text-emerald-500/50">
             <path d="M12.5,3 Q18,9 16,18 Q12.5,22 9,18 Q7,9 12.5,3 Z" fill="currentColor" opacity="0.7"/>
             <path d="M12.5,3 L12.5,18" stroke="currentColor" strokeWidth="0.8" opacity="0.5"/>
           </svg>
         </div>
-        <div className="absolute top-80 right-20 animate-float-slow-delayed">
+        <div className="absolute top-80 right-20">
           <svg width="28" height="28" viewBox="0 0 28 28" className="text-blue-500/50">
             <path d="M14,3 Q20,10 17,20 Q14,25 11,20 Q8,10 14,3 Z" fill="currentColor" opacity="0.7"/>
             <path d="M14,3 L14,20" stroke="currentColor" strokeWidth="0.9" opacity="0.5"/>
@@ -354,7 +348,7 @@ export function AppSidebar() {
           <div className="flex items-center justify-between text-xs">
             <span className="text-muted-foreground">System Status</span>
             <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              <div className="w-2 h-2 rounded-full bg-green-500" />
               <span className="text-green-500 font-medium">Online</span>
             </div>
           </div>
@@ -377,7 +371,7 @@ export function AppSidebar() {
               <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex items-center justify-center text-white font-semibold shadow-xl ring-2 ring-blue-500/30 transition-all duration-300 group-hover:scale-105">
                 <UserCircle className="h-6 w-6" />
               </div>
-              <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-background shadow-lg animate-pulse" />
+              <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-background shadow-lg" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="text-sm font-bold text-foreground truncate bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Admin User</div>
@@ -401,7 +395,7 @@ export function AppSidebar() {
         <div className="px-4 py-3 bg-gradient-to-r from-blue-600/5 via-purple-600/5 to-pink-600/5 border-t border-border/50">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 animate-pulse" />
+              <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
               <span className="text-[10px] font-medium bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">v1.0.0 Pro</span>
             </div>
             <span className="text-[10px] font-medium text-muted-foreground">© 2024 LCR Pay</span>
