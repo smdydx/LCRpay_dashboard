@@ -18,91 +18,85 @@ interface StatCardProps {
 export function StatCard({ title, value, icon: Icon, trend, prefix = "", gradient = "from-blue-500 to-purple-600" }: StatCardProps) {
   return (
     <Card className={cn(
-      "group relative overflow-hidden border-0 shadow-2xl transition-all duration-700",
+      "group relative overflow-hidden border-0 shadow-xl transition-all duration-300",
       "bg-gradient-to-br", gradient,
-      "hover:scale-[1.05] hover:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.6)] cursor-pointer",
-      "before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/30 before:via-white/10 before:to-transparent before:opacity-0 before:transition-all before:duration-700 hover:before:opacity-100",
-      "after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.15),transparent)] after:opacity-0 after:transition-all after:duration-700 hover:after:opacity-100",
-      "animate-card-float"
+      "hover:shadow-2xl cursor-pointer",
+      "before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/20 before:via-white/10 before:to-transparent before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100"
     )}>
       {/* Premium Glass Morphism Layer */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-3xl opacity-60" />
+      <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-xl opacity-70" />
       
-      {/* Animated Mesh Gradient Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-white/10 rounded-full blur-3xl animate-mesh-1" />
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-white/10 rounded-full blur-3xl animate-mesh-2" />
-        <div className="absolute top-1/4 left-1/4 w-3/4 h-3/4 bg-white/5 rounded-full blur-2xl animate-mesh-3" />
+      {/* Subtle Geometric Pattern Background */}
+      <div className="absolute inset-0 opacity-20">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <circle cx="20" cy="20" r="1" fill="white" opacity="0.3"/>
+              <circle cx="0" cy="0" r="1" fill="white" opacity="0.3"/>
+              <circle cx="40" cy="0" r="1" fill="white" opacity="0.3"/>
+              <circle cx="0" cy="40" r="1" fill="white" opacity="0.3"/>
+              <circle cx="40" cy="40" r="1" fill="white" opacity="0.3"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
       </div>
 
-      {/* Premium Border Shine Effect */}
-      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/40 to-transparent animate-border-shine" />
-      </div>
+      {/* Subtle Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-white/10 opacity-50" />
 
       <CardContent className="relative p-6 z-10">
         <div className="flex items-start justify-between gap-4">
           {/* Left section - Title and Value */}
           <div className="flex-1 min-w-0 space-y-3">
-            {/* Premium Title with Shimmer */}
-            <p className="text-white/95 text-sm font-bold tracking-wider uppercase truncate group-hover:text-white transition-all duration-500 relative">
-              <span className="relative z-10">{title}</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 animate-shimmer-slow" style={{ backgroundSize: '200% 100%' }} />
+            {/* Premium Title */}
+            <p className="text-white/90 text-sm font-semibold tracking-wide uppercase truncate group-hover:text-white transition-colors duration-300">
+              {title}
             </p>
 
-            {/* Premium Value with 3D Effect */}
-            <div className="flex items-baseline gap-2 transform transition-all duration-700 group-hover:scale-110 origin-left">
+            {/* Premium Value */}
+            <div className="flex items-baseline gap-2">
               {prefix && (
-                <span className="text-white/95 font-black text-2xl drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] group-hover:drop-shadow-[0_6px_20px_rgba(255,255,255,0.4)] transition-all duration-500">
+                <span className="text-white font-bold text-2xl drop-shadow-lg">
                   {prefix}
                 </span>
               )}
-              <h3 className="text-white font-black text-4xl tracking-tight truncate drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] group-hover:drop-shadow-[0_8px_30px_rgba(255,255,255,0.5)] transition-all duration-700">
+              <h3 className="text-white font-bold text-3xl tracking-tight truncate drop-shadow-lg">
                 {typeof value === 'number' ? value.toLocaleString() : value}
               </h3>
             </div>
 
-            {/* Premium Trend Badge with Neon Glow */}
+            {/* Premium Trend Badge */}
             {trend && (
               <div className={cn(
-                "inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-black backdrop-blur-2xl",
-                "transition-all duration-700 transform group-hover:scale-110",
-                "bg-white/20 border-2 border-white/30 text-white shadow-2xl",
-                "group-hover:shadow-[0_0_25px_rgba(255,255,255,0.4)]",
-                "animate-trend-pulse"
+                "inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md",
+                "transition-all duration-300",
+                "bg-white/15 border border-white/20 text-white shadow-lg"
               )}>
                 <span className={cn(
-                  "text-base transition-all duration-500 group-hover:scale-150",
+                  "text-sm",
                   trend.isPositive 
-                    ? "text-emerald-300 drop-shadow-[0_0_10px_rgba(16,185,129,0.9)]" 
-                    : "text-rose-300 drop-shadow-[0_0_10px_rgba(251,113,133,0.9)]"
+                    ? "text-emerald-300" 
+                    : "text-rose-300"
                 )}>
                   {trend.isPositive ? "↑" : "↓"}
                 </span>
-                <span className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">{Math.abs(trend.value)}%</span>
+                <span>{Math.abs(trend.value)}%</span>
               </div>
             )}
           </div>
 
-          {/* Premium Icon with 3D Rotation & Glow */}
-          <div className="flex-shrink-0 relative perspective-1000">
-            {/* Multi-layer Icon Glow */}
-            <div className="absolute inset-0 bg-white/40 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 animate-glow-pulse scale-110" />
-            <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700 scale-125" />
-            
-            <div className="relative p-5 bg-gradient-to-br from-white/25 to-white/10 backdrop-blur-2xl rounded-3xl border-2 border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all duration-700 group-hover:bg-white/35 group-hover:rotate-y-180 group-hover:scale-125 group-hover:shadow-[0_12px_48px_rgba(255,255,255,0.3)]">
-              <Icon className="h-8 w-8 text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)] transition-all duration-700 group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.9)]" />
+          {/* Premium Icon */}
+          <div className="flex-shrink-0 relative">
+            <div className="relative p-4 bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg transition-all duration-300 group-hover:bg-white/25">
+              <Icon className="h-7 w-7 text-white drop-shadow-md" />
             </div>
           </div>
         </div>
       </CardContent>
 
-      {/* Premium Bottom Shine Line */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-shine-slide" />
-      
-      {/* Corner Accents */}
-      <div className="absolute top-0 left-0 w-16 h-16 bg-gradient-to-br from-white/20 to-transparent rounded-br-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-      <div className="absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-tl from-white/20 to-transparent rounded-tl-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+      {/* Subtle Bottom Border Accent */}
+      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-60" />
     </Card>
   );
 }
