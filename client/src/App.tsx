@@ -17,6 +17,17 @@ import BBPSService from "@/pages/BBPSService";
 import DownloadUser from "@/pages/DownloadUser";
 import Settings from "@/pages/Settings";
 
+// User Management Pages
+import AllUsers from "@/pages/users/AllUsers";
+import PrimeUsers from "@/pages/users/PrimeUsers";
+import ActiveUsers from "@/pages/users/ActiveUsers";
+import InactiveUsers from "@/pages/users/InactiveUsers";
+import KYCPending from "@/pages/users/KYCPending";
+
+// Analytics Pages
+import RevenueAnalytics from "@/pages/analytics/RevenueAnalytics";
+import TransactionAnalytics from "@/pages/analytics/TransactionAnalytics";
+
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const [, setLocation] = useLocation();
   const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
@@ -98,6 +109,60 @@ function Router() {
           </DashboardLayout>
         </ProtectedRoute>
       </Route>
+      
+      {/* User Management Routes */}
+      <Route path="/users/all">
+        <ProtectedRoute>
+          <DashboardLayout>
+            <AllUsers />
+          </DashboardLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/users/prime">
+        <ProtectedRoute>
+          <DashboardLayout>
+            <PrimeUsers />
+          </DashboardLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/users/active">
+        <ProtectedRoute>
+          <DashboardLayout>
+            <ActiveUsers />
+          </DashboardLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/users/inactive">
+        <ProtectedRoute>
+          <DashboardLayout>
+            <InactiveUsers />
+          </DashboardLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/users/kyc-pending">
+        <ProtectedRoute>
+          <DashboardLayout>
+            <KYCPending />
+          </DashboardLayout>
+        </ProtectedRoute>
+      </Route>
+
+      {/* Analytics Routes */}
+      <Route path="/analytics/revenue">
+        <ProtectedRoute>
+          <DashboardLayout>
+            <RevenueAnalytics />
+          </DashboardLayout>
+        </ProtectedRoute>
+      </Route>
+      <Route path="/analytics/transactions">
+        <ProtectedRoute>
+          <DashboardLayout>
+            <TransactionAnalytics />
+          </DashboardLayout>
+        </ProtectedRoute>
+      </Route>
+
       <Route component={NotFound} />
     </Switch>
   );
